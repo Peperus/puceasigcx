@@ -17,9 +17,9 @@
 ## 📍 Cursor actual
 
 - **Sprint activo:** Sprint 0 — Foundation & Documentation
-- **Ticket activo:** `S0-T2` (aún no iniciado)
-- **Última sesión:** 2026-07-08 — cerrado `S0-T1`
-- **Próximo paso:** Inicializar backend Django + DRF modular. Ver `SPRINTS/sprint-00-foundation.md`, ticket `S0-T2`.
+- **Ticket activo:** `S0-T3` (aún no iniciado)
+- **Última sesión:** 2026-07-08 — cerrado `S0-T2`
+- **Próximo paso:** Docker Compose con PostgreSQL y Redis. Ver `SPRINTS/sprint-00-foundation.md`, ticket `S0-T3`.
 
 ---
 
@@ -62,7 +62,7 @@
 
 ### Sprint 0 — Foundation & Documentation
 - ✅ S0-T1 — Base documental del repositorio para Codex
-- ⬜ S0-T2 — Inicializar backend Django + DRF modular
+- ✅ S0-T2 — Inicializar backend Django + DRF modular
 - ⬜ S0-T3 — Docker Compose con PostgreSQL y Redis
 - ⬜ S0-T4 — Settings por entornos + variables de entorno
 - ⬜ S0-T5 — Calidad de código, testing y pre-commit
@@ -81,6 +81,7 @@
 |---|---|---|---|---|---|
 | _(ejemplo)_ | S0 | S0-T1 | `feat/s0-t1-docs` / #1 | revisión manual docs | Falta definir versión exacta de Django |
 | 2026-07-08 | S0 | S0-T1 | sin rama Git local | existencia de archivos; busqueda de secretos con `rg`; revision documental | Repositorio aun no tiene `.git`; cursor movido a S0-T2 |
+| 2026-07-08 | S0 | S0-T2 | commit pendiente | `python manage.py check`; `python manage.py migrate`; `GET /api/health/` local | Backend Django 6.0.7 + DRF 3.17.1 modular creado |
 | | | | | | |
 
 ---
