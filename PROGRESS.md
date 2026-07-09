@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 0.5 — Frontend Design System & UX Foundation
-- **Ticket activo:** `S0.5-T3` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado `S0.5-T2`
-- **Próximo paso:** Crear componentes UI reutilizables. Ver `SPRINTS/sprint-00-5-frontend-design-system.md`, ticket `S0.5-T3`.
+- **Sprint activo:** Sprint 1 — Authentication, Roles & Access Control
+- **Ticket activo:** `S1-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 0.5 completo (`S0.5-T3` a `S0.5-T10`)
+- **Próximo paso:** Implementar Custom User institucional. Ver `SPRINTS/sprint-01-auth-roles.md`, ticket `S1-T1`.
 
 ---
 
@@ -33,10 +33,10 @@
 
 ### Bloque Foundation
 - ✅ Sprint 0 — Foundation & Documentation
-- 🟡 **Sprint 0.5 — Frontend Design System & UX Foundation**
+- ✅ Sprint 0.5 — Frontend Design System & UX Foundation
 
 ### Bloque MVP — Gestión Académica
-- ⬜ Sprint 1 — Authentication, Roles & Access Control
+- 🟡 **Sprint 1 — Authentication, Roles & Access Control**
 - ⬜ Sprint 2 — Academic Catalogs & Institutional Setup
 - ⬜ Sprint 3 — People, Students & Teachers
 - ⬜ Sprint 4 — Academic Offer, Courses & Enrollment
@@ -63,14 +63,14 @@
 ### Sprint 0.5 — Frontend Design System & UX Foundation
 - ✅ S0.5-T1 — Crear estructura frontend base
 - ✅ S0.5-T2 — Definir tema visual institucional y tokens de diseño
-- ⬜ S0.5-T3 — Crear componentes UI reutilizables
-- ⬜ S0.5-T4 — Layout institucional autenticado y navegación por rol
-- ⬜ S0.5-T5 — Prototipos de autenticación y páginas públicas
-- ⬜ S0.5-T6 — Dashboards prototipo por rol
-- ⬜ S0.5-T7 — Wireframes navegables de módulos del MVP
-- ⬜ S0.5-T8 — Prototipo específico del constructor de sílabos
-- ⬜ S0.5-T9 — Prototipo específico de gestión de notas S1/S2/S3
-- ⬜ S0.5-T10 — Documentación de diseño y handoff para sprints funcionales
+- ✅ S0.5-T3 — Crear componentes UI reutilizables
+- ✅ S0.5-T4 — Layout institucional autenticado y navegación por rol
+- ✅ S0.5-T5 — Prototipos de autenticación y páginas públicas
+- ✅ S0.5-T6 — Dashboards prototipo por rol
+- ✅ S0.5-T7 — Wireframes navegables de módulos del MVP
+- ✅ S0.5-T8 — Prototipo específico del constructor de sílabos
+- ✅ S0.5-T9 — Prototipo específico de gestión de notas S1/S2/S3
+- ✅ S0.5-T10 — Documentación de diseño y handoff para sprints funcionales
 
 > Sprint 0 cerrado el 2026-07-08. El frontend debe fijarse en Sprint 0.5 antes de iniciar Sprint 1.
 
@@ -91,6 +91,7 @@
 | 2026-07-08 | S0 | S0-T8 | `2b1bf1a` | `pytest`; `manage.py check`; `curl /api/health/`; `curl /api/version/`; `ruff check`; `black --check` | Apps MVP con estructura consistente, routers base y convencion documentada |
 | 2026-07-09 | S0.5 | S0.5-T1 | `feat/s0-5-t1-frontend-base` | `npm install`; `npm run lint`; `npm run typecheck`; `npm run build` | Frontend Next.js + TypeScript + Tailwind creado en `/frontend`; npm audit reporta 2 vulnerabilidades moderadas de dependencias transitivas |
 | 2026-07-09 | S0.5 | S0.5-T2 | `feat/s0-5-t2-theme-tokens` | navegacion visual en `https://www.puce.edu.ec/`; `npm run lint`; `npm run typecheck`; `npm run build`; verificacion local `http://127.0.0.1:3000` | Tema institucional centralizado en tokens; documentacion inicial en `docs/frontend-design-system.md`; sin logos oficiales ni assets copiados |
+| 2026-07-09 | S0.5 | S0.5-T3 a S0.5-T10 | `feat/s0-5-ux-foundation-complete` | `npm run lint`; `npm run typecheck`; `npm run build` | Componentes UI, layout autenticado, navegacion por rol, auth publica, dashboards, wireframes MVP, constructor de silabos, notas S1/S2/S3 y handoff documentado; `npm install lucide-react` mantiene 2 vulnerabilidades moderadas transitivas |
 | | | | | | |
 
 ---
@@ -133,7 +134,7 @@
 - [x] Repositorio documentado para Codex.
 - [x] Backend Django ejecutable localmente.
 - [x] Frontend Next.js creado y compilando.
-- [ ] Design system institucional documentado.
+- [x] Design system institucional documentado.
 - [ ] Roles institucionales configurados.
 - [ ] Catálogos académicos mínimos funcionales.
 - [ ] Personas, estudiantes y docentes gestionables.

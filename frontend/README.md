@@ -1,16 +1,16 @@
 # PUCEASIG frontend
 
-Frontend base del ERP/SIG academico PUCE Amazonas. Este directorio corresponde
-al ticket `S0.5-T1` y deja preparada la estructura para el sistema de diseno,
-layout autenticado, navegacion por rol y prototipos navegables del Sprint 0.5.
+Frontend base del ERP/SIG academico PUCE Amazonas. El Sprint 0.5 deja lista la
+fundacion visual y UX antes de iniciar pantallas funcionales del MVP.
 
 ## Stack
 
 - Next.js con App Router.
-- TypeScript en modo estricto.
+- TypeScript.
 - Tailwind CSS.
+- Lucide React para iconografia.
 - ESLint.
-- npm como gestor de paquetes inicial.
+- npm como gestor inicial.
 
 ## Scripts
 
@@ -21,82 +21,57 @@ npm run typecheck
 npm run build
 ```
 
-## Estructura
+## Estructura principal
 
 ```text
 frontend/
 ├── app/
 │   ├── (auth)/
 │   ├── (dashboard)/
-│   ├── globals.css
-│   └── layout.tsx
+│   ├── 403/
+│   ├── error.tsx
+│   ├── not-found.tsx
+│   └── page.tsx
 ├── components/
-│   ├── layout/
-│   ├── ui/
-│   ├── forms/
-│   ├── tables/
 │   ├── dashboard/
-│   └── feedback/
+│   ├── feedback/
+│   ├── layout/
+│   ├── prototypes/
+│   └── ui/
 ├── config/
-│   ├── navigation.ts
-│   ├── roles.ts
-│   └── theme.ts
 ├── lib/
-│   ├── api.ts
-│   ├── mock-data.ts
-│   └── utils.ts
-├── types/
-│   ├── academic.ts
-│   ├── auth.ts
-│   └── navigation.ts
-└── README.md
+└── types/
 ```
 
-## Variables de entorno
+## Que incluye el Sprint 0.5
 
-Copiar las claves de `.env.example` al entorno local cuando se necesite
-configuracion. Los valores incluidos son ficticios y no contienen credenciales.
+- Tokens visuales institucionales en `config/theme.ts` y `app/globals.css`.
+- Componentes UI reutilizables: botones, inputs, selects, cards, tablas, badges,
+  dialog, alertas, tabs, breadcrumbs, paginacion y estados de feedback.
+- Layout autenticado con sidebar, header, menu por rol y selector temporal de
+  rol para prototipo.
+- Prototipos publicos: login, recuperacion, preguntas de seguridad, 403, 404 y
+  error general.
+- Dashboards por rol.
+- Wireframes navegables para estudiantes, docentes, roles, periodos, carreras,
+  asignaturas, paralelos, oferta, matricula, silabos, notas, reportes y
+  auditoria.
+- Constructor visual de silabos nueva version.
+- Prototipo visual de gestion de notas S1/S2/S3.
 
-## Convenciones iniciales
+## Datos mock
 
-- Mantener mocks sinteticos y centralizados en `lib/mock-data.ts`.
-- Centralizar roles y navegacion en `config/`.
-- No consumir API real hasta que el sprint funcional correspondiente lo pida.
-- No incluir logos oficiales ni datos reales si no existen en el repositorio.
-- Mantener tokens visuales completos en `config/theme.ts` y variables CSS en
-  `app/globals.css`.
+Los datos sinteticos viven en `lib/mock-data.ts`. No usar datos reales de
+estudiantes, docentes, autoridades, personal administrativo ni credenciales.
 
-## Tema visual institucional
+## Integracion futura
 
-Referencia publica revisada: https://www.puce.edu.ec/ el 2026-07-09.
+La autenticacion real, el consumo de API, permisos efectivos, persistencia de
+silabos, motor de notas y reportes exportables quedan para los sprints
+funcionales. El selector de rol se debe reemplazar en Sprint 1 por el perfil
+obtenido desde la API.
 
-La identidad visual se traduce al ERP como una interfaz sobria y operativa:
-
-- Azul institucional `#003B81` para navegacion principal, encabezados y
-  acciones primarias.
-- Azul profundo `#002B5C` para estados activos, sidebar o superficies de alto
-  contraste.
-- Turquesa `#00BFD8` y celeste `#00A0DD` para foco, enlaces, indicadores y
-  acentos.
-- Blanco y grises neutros para superficies, tablas, filtros y secciones de
-  trabajo.
-- Barra superior gris oscuro `#40424D` para utilidades o contexto de sesion.
-
-Los colores semanticos no deben improvisarse desde la paleta de marca:
-
-- Exito: `#0F8A5F`.
-- Advertencia: `#B7791F`.
-- Error: `#B42318`.
-- Informacion: `#006FBF`.
-
-Las superficies usan radios discretos entre `3px` y `8px`. Inputs y botones
-parten de `42px` de alto. Las sombras deben ser sutiles y reservarse para
-paneles, menus y foco.
-
-No se incluye logotipo oficial. El layout debe reservar un espacio de marca que
-pueda recibir un asset autorizado mas adelante.
-
-## Verificacion del ticket
+## Verificacion
 
 ```bash
 npm install
@@ -104,3 +79,6 @@ npm run lint
 npm run typecheck
 npm run build
 ```
+
+`npm audit` reporta 2 vulnerabilidades moderadas transitivas en la base actual.
+No se ejecuta `npm audit fix --force` por riesgo de cambios incompatibles.
