@@ -24,6 +24,31 @@ PUCEASIG gestiona informacion academica y personal. La seguridad debe validarse 
 - Bibliotecario, para fase posterior.
 - Invitado o auditor, si se requiere.
 
+## Roles implementados en Sprint 1
+
+Los roles se implementan como `Group` de Django y se sincronizan con el comando
+idempotente:
+
+```bash
+python backend/manage.py seed_roles
+```
+
+| Codigo interno | Grupo Django |
+|---|---|
+| `administrator` | Administrador |
+| `secretary` | Secretaria |
+| `career_coordinator` | Coordinador de carrera |
+| `teacher` | Docente |
+| `student` | Estudiante |
+| `academic_director` | Direccion academica |
+| `wellbeing` | Bienestar |
+| `librarian` | Bibliotecario |
+| `guest` | Invitado/Consulta |
+
+El seed agrega permisos base de usuarios y auditoria a Administrador,
+Secretaria y Coordinador de carrera cuando esos permisos existen. No elimina
+permisos agregados manualmente.
+
 ## Permisos iniciales por rol
 
 | Accion | Administrador | Secretaria | Coordinador | Docente | Estudiante |
@@ -55,6 +80,22 @@ Requisitos:
 - Recuperacion de contraseÃ±a segura cuando se implemente.
 - Desactivacion de usuarios sin borrar historial.
 
+Endpoints implementados:
+
+| Endpoint | Metodo | Acceso | Descripcion |
+|---|---|---|---|
+| `/api/auth/login/` | POST | Publico | Devuelve `access`, `refresh` y datos minimos de sesion. |
+| `/api/auth/refresh/` | POST | Publico | Renueva el access token a partir del refresh token. |
+| `/api/auth/logout/` | POST | Autenticado | Invalida el refresh token mediante blacklist. |
+| `/api/auth/password/reset/` | POST | Publico | Envia instrucciones sin revelar si el correo existe. |
+| `/api/auth/password/reset/confirm/` | POST | Publico | Valida UID/token y cambia la contrasena. |
+| `/api/me/` | GET/PATCH | Autenticado | Consulta o actualiza solo campos editables del perfil propio. |
+
+Claims JWT agregados:
+
+- `email`.
+- `roles`, con codigos internos institucionales.
+
 ## Autorizacion
 
 La autorizacion debe cubrir:
@@ -63,6 +104,19 @@ La autorizacion debe cubrir:
 - Permisos por objeto cuando aplique, por ejemplo docente solo en sus cursos y estudiante solo en sus notas.
 - Validacion en views, serializers y services criticos.
 - Pruebas para accesos permitidos y denegados.
+
+Clases DRF reutilizables implementadas en `apps.core.permissions`:
+
+- `IsAdministrator`.
+- `IsSecretary`.
+- `IsCareerCoordinator`.
+- `IsTeacher`.
+- `IsStudent`.
+- `IsAcademicStaff`.
+
+`IsAcademicStaff` agrupa Administrador, Secretaria, Coordinador de carrera y
+Direccion academica. Los permisos por objeto se implementaran en los modulos
+academicos cuando existan cursos, matriculas, silabos y notas reales.
 
 ## Auditoria
 
@@ -86,6 +140,16 @@ Cada auditoria debe registrar:
 - Justificacion.
 - Fecha y hora.
 - IP y user agent cuando esten disponibles.
+
+Sprint 1 crea `AuditLog` y registra:
+
+- Login fallido.
+- Cambio de contrasena por recuperacion.
+- Creacion de usuario.
+- Asignacion o retiro de grupos/roles.
+
+El modelo queda disponible solo en Django Admin inicialmente y sus registros son
+de solo lectura desde la administracion.
 
 ## Datos sensibles
 

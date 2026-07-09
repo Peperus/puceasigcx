@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 0.5 — Frontend Design System & UX Foundation
-- **Ticket activo:** `S0.5-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-08 — cerrado `S0-T8` y Sprint 0
-- **Próximo paso:** Crear estructura frontend base. Ver `SPRINTS/sprint-00-5-frontend-design-system.md`, ticket `S0.5-T1`.
+- **Sprint activo:** Sprint 4 — Academic Offer, Courses & Enrollment
+- **Ticket activo:** `S4-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 3 completo (`S3-T1` a `S3-T6`)
+- **Próximo paso:** Implementar oferta académica. Ver `SPRINTS/sprint-04-academic-offer-enrollment.md`, ticket `S4-T1`.
 
 ---
 
@@ -33,13 +33,13 @@
 
 ### Bloque Foundation
 - ✅ Sprint 0 — Foundation & Documentation
-- 🟡 **Sprint 0.5 — Frontend Design System & UX Foundation**
+- ✅ Sprint 0.5 — Frontend Design System & UX Foundation
 
 ### Bloque MVP — Gestión Académica
-- ⬜ Sprint 1 — Authentication, Roles & Access Control
-- ⬜ Sprint 2 — Academic Catalogs & Institutional Setup
-- ⬜ Sprint 3 — People, Students & Teachers
-- ⬜ Sprint 4 — Academic Offer, Courses & Enrollment
+- ✅ Sprint 1 — Authentication, Roles & Access Control
+- ✅ Sprint 2 — Academic Catalogs & Institutional Setup
+- ✅ Sprint 3 — People, Students & Teachers
+- 🟡 **Sprint 4 — Academic Offer, Courses & Enrollment**
 - ⬜ Sprint 5 — Syllabus Management
 - ⬜ Sprint 6 — Grading Engine S1/S2/S3
 - ⬜ Sprint 7 — Grade Entry, Student Views & Closures
@@ -58,21 +58,39 @@
 
 ---
 
-## Detalle del sprint activo
+## Detalle de sprints
 
-### Sprint 0.5 — Frontend Design System & UX Foundation
-- ⬜ S0.5-T1 — Crear estructura frontend base
-- ⬜ S0.5-T2 — Definir tema visual institucional y tokens de diseño
-- ⬜ S0.5-T3 — Crear componentes UI reutilizables
-- ⬜ S0.5-T4 — Layout institucional autenticado y navegación por rol
-- ⬜ S0.5-T5 — Prototipos de autenticación y páginas públicas
-- ⬜ S0.5-T6 — Dashboards prototipo por rol
-- ⬜ S0.5-T7 — Wireframes navegables de módulos del MVP
-- ⬜ S0.5-T8 — Prototipo específico del constructor de sílabos
-- ⬜ S0.5-T9 — Prototipo específico de gestión de notas S1/S2/S3
-- ⬜ S0.5-T10 — Documentación de diseño y handoff para sprints funcionales
+### Sprint 3 — People, Students & Teachers
+- ✅ S3-T1 — Modelo Person central
+- ✅ S3-T2 — Modelo Student
+- ✅ S3-T3 — Modelo Teacher
+- ✅ S3-T4 — Horarios de atención docente
+- ✅ S3-T5 — API/Admin de personas, estudiantes y docentes
+- ✅ S3-T6 — Importación controlada desde CSV
 
-> Sprint 0 cerrado el 2026-07-08. El frontend debe fijarse en Sprint 0.5 antes de iniciar Sprint 1.
+> Sprint 3 cerrado el 2026-07-09. El cursor queda en Sprint 4 / S4-T1.
+
+### Sprint 2 — Academic Catalogs & Institutional Setup
+- ✅ S2-T1 — Modelos de periodos académicos
+- ✅ S2-T2 — Carreras, modalidades y dominios
+- ✅ S2-T3 — Planes de estudio, niveles y malla
+- ✅ S2-T4 — Asignaturas y prerrequisitos
+- ✅ S2-T5 — Parámetros académicos configurables
+- ✅ S2-T6 — API y Admin de catálogos
+- ✅ S2-T7 — Seeds sintéticos mínimos
+
+> Sprint 2 cerrado el 2026-07-09. El cursor queda en Sprint 3 / S3-T1.
+
+### Sprint 1 — Authentication, Roles & Access Control
+- ✅ S1-T1 — Custom User institucional
+- ✅ S1-T2 — Roles institucionales base
+- ✅ S1-T3 — Login JWT y refresh
+- ✅ S1-T4 — Recuperación de contraseña segura
+- ✅ S1-T5 — Permission classes DRF por rol
+- ✅ S1-T6 — Perfil actual y sesión institucional
+- ✅ S1-T7 — Auditoría base de autenticación y roles
+
+> Sprint 1 cerrado el 2026-07-09. El cursor queda en Sprint 2 / S2-T1.
 
 ---
 
@@ -89,6 +107,23 @@
 | 2026-07-08 | S0 | S0-T6 | `943b2f3` | `manage.py check`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Workflow CI agregado; check verde remoto queda pendiente hasta push a GitHub |
 | 2026-07-08 | S0 | S0-T7 | `f0b7029` | `manage.py check --deploy`; `pytest backend/apps/core`; `ruff check`; `black --check`; `curl /api/health/` | JWT, CORS y throttling configurados; healthcheck sigue publico |
 | 2026-07-08 | S0 | S0-T8 | `2b1bf1a` | `pytest`; `manage.py check`; `curl /api/health/`; `curl /api/version/`; `ruff check`; `black --check` | Apps MVP con estructura consistente, routers base y convencion documentada |
+| 2026-07-09 | S0.5 | S0.5-T1 | `feat/s0-5-t1-frontend-base` | `npm install`; `npm run lint`; `npm run typecheck`; `npm run build` | Frontend Next.js + TypeScript + Tailwind creado en `/frontend`; npm audit reporta 2 vulnerabilidades moderadas de dependencias transitivas |
+| 2026-07-09 | S0.5 | S0.5-T2 | `feat/s0-5-t2-theme-tokens` | navegacion visual en `https://www.puce.edu.ec/`; `npm run lint`; `npm run typecheck`; `npm run build`; verificacion local `http://127.0.0.1:3000` | Tema institucional centralizado en tokens; documentacion inicial en `docs/frontend-design-system.md`; sin logos oficiales ni assets copiados |
+| 2026-07-09 | S0.5 | S0.5-T3 a S0.5-T10 | `feat/s0-5-ux-foundation-complete` | `npm run lint`; `npm run typecheck`; `npm run build` | Componentes UI, layout autenticado, navegacion por rol, auth publica, dashboards, wireframes MVP, constructor de silabos, notas S1/S2/S3 y handoff documentado; `npm install lucide-react` mantiene 2 vulnerabilidades moderadas transitivas |
+| 2026-07-09 | S1 | S1-T1 a S1-T7 | `feat/s1-auth-roles` | `manage.py check`; `manage.py makemigrations accounts audit`; `manage.py migrate`; `createsuperuser --noinput`; `manage.py seed_roles`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Usuario institucional custom, roles Django Groups, JWT login/refresh/logout, password reset, `/api/me/`, permissions DRF y auditoria base implementados; base SQLite previa respaldada como `backend/db.sqlite3.pre-s1-backup-*` por cambio de `AUTH_USER_MODEL` |
+| 2026-07-09 | S2 | S2-T1 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_periods.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Periodos académicos con estados, periodo actual único, validación de solapamiento activo y admin con filtros. |
+| 2026-07-09 | S2 | S2-T2 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_careers.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Unidades académicas, modalidades, dominios y carreras con códigos únicos y permisos de admin por rol. |
+| 2026-07-09 | S2 | S2-T3 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_study_plan.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Planes de estudio, niveles ordenados y plan vigente único por carrera. |
+| 2026-07-09 | S2 | S2-T4 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_subjects.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Asignaturas por carrera, malla curricular y prerrequisitos con rechazo de ciclos simples. |
+| 2026-07-09 | S2 | S2-T5 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_academic_settings.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Configuración académica 0-50, umbral 30, niveles A/B/C/D y catálogo S1/S2/S3 consultable por servicio. |
+| 2026-07-09 | S2 | S2-T6 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_catalog_api.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | API `/api/academic/` protegida por roles, admin con filtros/búsqueda y `docs/api.md` creado. |
+| 2026-07-09 | S2 | S2-T7 | `feat/s2-academic-catalogs` | `manage.py seed_academic_catalogs`; `manage.py seed_academic_catalogs`; `pytest backend/apps/academic_catalogs/tests/test_seeds.py`; `pytest`; `manage.py seed_roles` | Seed sintético idempotente para catálogos base; roles sincronizados con permisos Django Admin de catálogos. |
+| 2026-07-09 | S3 | S3-T1 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_person_model.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | `Person` central con identificacion unica opcional, relacion opcional con usuario y admin con busqueda. |
+| 2026-07-09 | S3 | S3-T2 | `feat/s3-people-students-teachers` | `pytest backend/apps/students/tests/test_student_model.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Perfil `Student` OneToOne con `Person`, codigo unico, carrera, plan, periodo de ingreso y estados academicos. |
+| 2026-07-09 | S3 | S3-T3 | `feat/s3-people-students-teachers` | `pytest backend/apps/teachers/tests/test_teacher_model.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Perfil `Teacher` OneToOne con `Person`, datos para silabo, estado y dominios/areas. |
+| 2026-07-09 | S3 | S3-T4 | `feat/s3-people-students-teachers` | `pytest backend/apps/teachers/tests/test_office_hours.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Horarios de atencion docente presenciales/virtuales con validacion de rango horario. |
+| 2026-07-09 | S3 | S3-T5 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_people_api.py`; `pytest backend/apps/students/tests/test_students_api.py`; `pytest backend/apps/teachers/tests/test_teachers_api.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | API/Admin de personas, estudiantes y docentes protegida por roles; perfiles propios para docente/estudiante. |
+| 2026-07-09 | S3 | S3-T6 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_import_people.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | Importacion CSV sintetica tolerante a errores, con resumen de creados/actualizados/rechazados y auditoria `people_imported`. |
 | | | | | | |
 
 ---
@@ -101,6 +136,8 @@
 - Versiones de servicios locales: PostgreSQL 18 Alpine, Redis 8 Alpine.
 - Frontend del MVP: Next.js + TypeScript + Tailwind CSS.
 - Sprint específico de frontend: Sprint 0.5 — Frontend Design System & UX Foundation, antes de Sprint 1.
+- Gestor de paquetes frontend inicial: npm.
+- Tema visual frontend inspirado en el sitio público de PUCE revisado el 2026-07-09: azul institucional, turquesa/celeste de apoyo, blanco y grises neutros; sin copiar logos ni assets oficiales.
 - Django Admin: herramienta interna auxiliar para administración, soporte y carga inicial; no será el frontend principal del MVP.
 - Componentes UI frontend: shadcn/ui o componentes propios equivalentes, centralizados y reutilizables.
 - Formularios frontend: React Hook Form + Zod cuando existan formularios funcionales.
@@ -111,12 +148,13 @@
 - Autorización: roles institucionales + permisos por objeto cuando aplique.
 - Auditoría obligatoria para notas, sílabos, matrículas, roles y cambios críticos.
 - Sistemas de notas del MVP: S1, S2 y S3 como motor de reglas probado, no como fórmulas copiadas de Excel.
+- Catálogos académicos Sprint 2: `AcademicPeriod`, `FacultyOrUnit`, `Modality`, `AcademicDomain`, `Career`, `StudyPlan`, `AcademicLevel`, `Subject`, `CurriculumSubject`, `CurriculumPrerequisite`, `AcademicSetting`, `AchievementLevel` y `GradingSystem`.
+- Personas Sprint 3: `Person` es el dato maestro central; `Student` y `Teacher` son perfiles OneToOne y no duplican datos personales.
 
 ---
 
 ## Decisiones pendientes
 
-- Definir gestor de paquetes frontend: npm, pnpm o yarn.
 - Confirmar si se usará shadcn/ui completo o componentes propios equivalentes.
 - Definir proveedor S3 compatible: Cloudflare R2, AWS S3 o MinIO institucional.
 - Definir estrategia de despliegue piloto: VPS, servidor institucional, Docker Compose o PaaS.
@@ -129,11 +167,11 @@
 
 - [x] Repositorio documentado para Codex.
 - [x] Backend Django ejecutable localmente.
-- [ ] Frontend Next.js creado y compilando.
-- [ ] Design system institucional documentado.
-- [ ] Roles institucionales configurados.
-- [ ] Catálogos académicos mínimos funcionales.
-- [ ] Personas, estudiantes y docentes gestionables.
+- [x] Frontend Next.js creado y compilando.
+- [x] Design system institucional documentado.
+- [x] Roles institucionales configurados.
+- [x] Catálogos académicos mínimos funcionales.
+- [x] Personas, estudiantes y docentes gestionables.
 - [ ] Cursos/paralelos y matrículas gestionables.
 - [ ] Sílabos nueva versión gestionables.
 - [ ] Motor de notas S1/S2/S3 probado.
