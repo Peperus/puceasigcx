@@ -58,25 +58,31 @@ Al inicio del proyecto algunas carpetas todavia no existen; se crean en sus tick
 
 ## Comandos previstos
 
-Los comandos se habilitaran gradualmente durante Sprint 0:
+Instala dependencias de backend en un entorno virtual local:
 
 ```bash
-# Backend, desde S0-T2
-cd backend
-python manage.py check
-python manage.py migrate
-python manage.py runserver
+python -m venv .venv
+.venv/Scripts/python -m pip install -r backend/requirements.txt
+```
 
-# Docker, desde S0-T3
+Comandos principales:
+
+```bash
+# Backend
+.venv/Scripts/python backend/manage.py check
+.venv/Scripts/python backend/manage.py migrate
+.venv/Scripts/python backend/manage.py runserver
+
+# Docker
 docker compose up -d
 docker compose ps
 
-# Calidad, desde S0-T5
-pytest
-ruff check .
-black --check .
-isort --check .
-pre-commit run --all-files
+# Calidad
+.venv/Scripts/python -m pytest
+.venv/Scripts/python -m ruff check .
+.venv/Scripts/python -m black --check .
+.venv/Scripts/python -m isort --check .
+.venv/Scripts/python -m pre_commit run --all-files
 
 # Frontend, desde Sprint 0.5
 cd frontend

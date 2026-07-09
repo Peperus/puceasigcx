@@ -1,0 +1,36 @@
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "config.settings.test"
+pythonpath = ["backend"]
+testpaths = ["backend/apps"]
+python_files = ["test_*.py", "*_test.py", "tests.py"]
+
+[tool.black]
+line-length = 88
+target-version = ["py314"]
+extend-exclude = '''
+/(
+  \.venv
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+skip = [".venv", "migrations"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py314"
+exclude = [
+  ".git",
+  ".venv",
+  "migrations",
+]
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP"]
+ignore = []
+
+[tool.ruff.lint.per-file-ignores]
+"backend/config/settings/*.py" = ["F403", "F405"]
