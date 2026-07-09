@@ -27,6 +27,14 @@ ACADEMIC_CATALOG_MODELS = {
 PEOPLE_MODELS = {"person"}
 STUDENT_MODELS = {"student"}
 TEACHER_MODELS = {"teacher", "teacherofficehour"}
+ENROLLMENT_MODELS = {
+    "academicoffer",
+    "coursesection",
+    "teachingassignment",
+    "enrollment",
+    "courseenrollment",
+    "homologation",
+}
 
 
 def catalog_permissions(*actions):
@@ -60,6 +68,14 @@ PERMISSIONS_BY_ROLE = {
         "delete",
         "view",
     )
+    | app_model_permissions(
+        "enrollment",
+        ENROLLMENT_MODELS,
+        "add",
+        "change",
+        "delete",
+        "view",
+    )
     | {
         "accounts.add_user",
         "accounts.change_user",
@@ -75,6 +91,7 @@ PERMISSIONS_BY_ROLE = {
     | app_model_permissions("people", PEOPLE_MODELS, "add", "change", "view")
     | app_model_permissions("students", STUDENT_MODELS, "add", "change", "view")
     | app_model_permissions("teachers", TEACHER_MODELS, "add", "change", "view")
+    | app_model_permissions("enrollment", ENROLLMENT_MODELS, "add", "change", "view")
     | {
         "accounts.add_user",
         "accounts.change_user",
@@ -87,6 +104,18 @@ PERMISSIONS_BY_ROLE = {
     | app_model_permissions("people", PEOPLE_MODELS, "view")
     | app_model_permissions("students", STUDENT_MODELS, "view")
     | app_model_permissions("teachers", TEACHER_MODELS, "view")
+    | app_model_permissions(
+        "enrollment",
+        {"academicoffer", "coursesection", "teachingassignment"},
+        "add",
+        "change",
+        "view",
+    )
+    | app_model_permissions(
+        "enrollment",
+        {"enrollment", "courseenrollment", "homologation"},
+        "view",
+    )
     | {
         "accounts.view_user",
         "accounts.view_userprofile",

@@ -204,15 +204,38 @@ Configuracion base:
 - C: 30 a 39.99.
 - D: 0 a 29.99.
 
-### CourseOffering
+### AcademicOffer
 
-Curso/paralelo abierto en un periodo.
+Oferta academica abierta por periodo, carrera, plan y nivel.
 
 Relaciones:
 
 - Pertenece a un periodo.
-- Pertenece a una carrera y asignatura.
-- Tiene paralelo, cupo, aula y estado.
+- Pertenece a una carrera.
+- Pertenece a un plan de estudio.
+- Pertenece a un nivel academico.
+
+Implementado en Sprint 4:
+
+- Estados: borrador, publicada, cerrada, archivada.
+- No se duplica una oferta para el mismo periodo, carrera, plan y nivel.
+
+### CourseSection
+
+Curso/paralelo abierto dentro de una oferta academica.
+
+Relaciones:
+
+- Pertenece a una oferta academica.
+- Pertenece a una asignatura.
+- Tiene paralelo, cupo, modalidad, aula, estado y sistema de calificacion S1/S2/S3.
+
+Implementado en Sprint 4:
+
+- Estados: planificado, activo, cerrado, cancelado.
+- No se duplica un paralelo para la misma oferta y asignatura.
+- El sistema de calificacion debe estar activo.
+- Solo cursos activos aceptan matriculas con cupo disponible.
 
 ### TeachingAssignment
 
@@ -223,6 +246,12 @@ Roles sugeridos:
 - Titular.
 - Codocente.
 - Invitado.
+
+Implementado en Sprint 4:
+
+- Roles: titular y codocente.
+- El docente debe estar activo.
+- Solo puede existir un docente titular activo por curso.
 
 ## Estudiantes y matricula
 
@@ -261,6 +290,12 @@ Reglas:
 
 Matricula del estudiante en un periodo academico.
 
+Implementado en Sprint 4:
+
+- Relaciona estudiante, periodo, carrera y plan.
+- No se duplica una matricula del mismo estudiante en el mismo periodo.
+- Estados: matriculado, retirado, aprobado, reprobado, homologado y anulado.
+
 ### CourseEnrollment
 
 Matricula del estudiante en un curso/paralelo especifico.
@@ -273,6 +308,22 @@ Estados sugeridos:
 - Aprobado.
 - Reprobado.
 - En recuperacion.
+
+Implementado en Sprint 4:
+
+- No se duplica la matricula del mismo estudiante en el mismo curso.
+- Valida periodo, carrera y plan contra la oferta del curso.
+- Respeta cupo en cursos activos.
+
+### Homologation
+
+Registro minimo de homologaciones o equivalencias.
+
+Implementado en Sprint 4:
+
+- Relaciona estudiante, asignatura, periodo, resolucion/observacion y estado.
+- No afecta notas automaticamente hasta el sprint de grading.
+- Registra auditoria cuando se crea o actualiza desde servicio/API.
 
 ## Docentes
 

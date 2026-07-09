@@ -78,3 +78,48 @@ python backend/manage.py import_people_csv ruta/al/archivo.csv --user-email admi
 El CSV debe ser sintetico, no debe guardarse en Git y reporta creados,
 actualizados y rechazados. La importacion registra auditoria con accion
 `people_imported`.
+
+## Oferta Academica y Matriculas
+
+Permisos:
+
+- Administrador y Secretaria: CRUD completo de oferta, cursos, asignaciones,
+  matriculas en periodo, matriculas en curso y homologaciones.
+- Coordinador de carrera: gestiona oferta, cursos y asignaciones de sus
+  carreras; consulta matriculas y homologaciones de sus carreras.
+- Docente: consulta solo los cursos/paralelos asignados y sus estudiantes
+  matriculados.
+- Estudiante: consulta solo sus cursos matriculados y homologaciones propias.
+
+| Metodo | Endpoint | Recurso |
+|---|---|---|
+| GET/POST | `/api/enrollment/academic-offers/` | Oferta academica por periodo, carrera, plan y nivel. |
+| GET/PATCH/DELETE | `/api/enrollment/academic-offers/{id}/` | Oferta academica. |
+| GET/POST | `/api/enrollment/course-sections/` | Cursos/paralelos por oferta y asignatura. |
+| GET/PATCH/DELETE | `/api/enrollment/course-sections/{id}/` | Curso/paralelo. |
+| GET/POST | `/api/enrollment/teaching-assignments/` | Asignaciones docentes. |
+| GET/PATCH/DELETE | `/api/enrollment/teaching-assignments/{id}/` | Asignacion docente. |
+| GET/POST | `/api/enrollment/enrollments/` | Matricula academica de estudiante en periodo. |
+| GET/PATCH/DELETE | `/api/enrollment/enrollments/{id}/` | Matricula academica. |
+| GET/POST | `/api/enrollment/course-enrollments/` | Inscripcion de estudiante en curso/paralelo. |
+| GET/PATCH/DELETE | `/api/enrollment/course-enrollments/{id}/` | Matricula en curso. |
+| GET/POST | `/api/enrollment/homologations/` | Homologaciones o equivalencias basicas. |
+| GET/PATCH/DELETE | `/api/enrollment/homologations/{id}/` | Homologacion. |
+
+Reglas principales:
+
+- No se duplica una oferta para el mismo periodo, carrera, plan y nivel.
+- No se duplica un paralelo para la misma oferta y asignatura.
+- Un curso activo respeta cupo al matricular estudiantes.
+- La API no permite matricular en cursos cerrados, cancelados o planificados.
+- Matriculas, inscripciones en curso y homologaciones registran auditoria.
+
+## Dashboard Academico Minimo
+
+| Metodo | Endpoint | Acceso | Descripcion |
+|---|---|---|---|
+| GET | `/api/academic/dashboard/` | Administrador, Secretaria, Coordinador | Conteos por periodo de estudiantes, docentes, cursos y matriculas. |
+| GET | `/api/reports/academic-dashboard/` | Administrador, Secretaria, Coordinador | Alias de reportes para el mismo dashboard. |
+
+El parametro opcional `period` acepta `id` o `code`. Si no se envia, se usa el
+periodo actual y, si no existe, el periodo mas reciente.
