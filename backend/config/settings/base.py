@@ -124,6 +124,10 @@ STATIC_URL = "static/"
 STATIC_ROOT = BASE_DIR / "staticfiles"
 MEDIA_URL = "media/"
 MEDIA_ROOT = BASE_DIR / "media"
+SYLLABUS_SIGNED_FILE_MAX_BYTES = env.int(
+    "SYLLABUS_SIGNED_FILE_MAX_BYTES",
+    default=5 * 1024 * 1024,
+)
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 AUTH_USER_MODEL = "accounts.User"

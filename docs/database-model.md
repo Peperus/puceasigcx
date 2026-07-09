@@ -379,48 +379,76 @@ Regla:
 
 Silabo asociado a un curso/paralelo.
 
-Campos sugeridos:
+Implementado en Sprint 5:
 
-- `course_offering`
-- `version`
-- `status`
-- `domain`
+- `course_section`
+- `version`: `new` o `legacy`
+- `status`: borrador, en revision, aprobado, observado, finalizado o archivado
 - `subject_description`
 - `methodology`
+- `lead_teacher`
+- `co_teacher`
 - `signed_file`
 - `created_by`
+- `finalized_at`
 - `submitted_at`
 - `approved_at`
-- `closed_at`
+- `approved_by`
+- `signed_file_uploaded_by`
+- `signed_file_uploaded_at`
+- `archived_at`
 
 Versiones:
 
 - Nueva version.
 - Legacy o antigua.
 
+Reglas:
+
+- Un curso puede tener un solo silabo activo; los archivados conservan historial.
+- El docente titular debe estar asignado como titular del curso.
+- El codocente debe estar asignado como codocente del curso.
+- El silabo aprobado se considera listo para habilitar notas en Sprint 6.
+
 ### SyllabusCompetency
 
 Competencia transversal o disciplinar.
+
+Implementado con tipo, texto y orden.
 
 ### LearningOutcome
 
 Resultado de aprendizaje de carrera o asignatura.
 
+Implementado como `SyllabusLearningOutcome`, con minimo funcional de 3 RA de
+carrera y 3 RA de asignatura antes de rubricas/finalizacion.
+
 ### EvaluationCriterion
 
 Criterio de evaluacion asociado a un resultado de aprendizaje.
+
+Implementado como `SyllabusCriterion`, con ponderacion 0.01 a 100.00 y
+validacion de suma 100 por RA de asignatura.
 
 ### AchievementLevel
 
 Descripcion de niveles A, B, C y D.
 
+Implementado como `SyllabusAchievementLevel`, obligatorio A/B/C/D por criterio.
+
 ### SyllabusBibliography
 
 Bibliografia basica, complementaria, recomendada o digital.
 
+Implementado con referencia APA, codigo de biblioteca opcional, cantidad de
+ejemplares y orden.
+
 ### WeeklyPlan
 
 Planificacion semanal con estrategias, horas, recursos, escenarios y dimension del conocimiento.
+
+Implementado como `SyllabusWeeklyPlan`, vinculado a RA de asignatura/carrera y
+con experiencias de contacto docente, practico-experimentales y autonomas.
 
 ## Notas
 
