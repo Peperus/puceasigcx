@@ -35,6 +35,15 @@ ENROLLMENT_MODELS = {
     "courseenrollment",
     "homologation",
 }
+SYLLABUS_MODELS = {
+    "syllabus",
+    "syllabusachievementlevel",
+    "syllabusbibliography",
+    "syllabuscompetency",
+    "syllabuscriterion",
+    "syllabuslearningoutcome",
+    "syllabusweeklyplan",
+}
 
 
 def catalog_permissions(*actions):
@@ -76,6 +85,14 @@ PERMISSIONS_BY_ROLE = {
         "delete",
         "view",
     )
+    | app_model_permissions(
+        "syllabus",
+        SYLLABUS_MODELS,
+        "add",
+        "change",
+        "delete",
+        "view",
+    )
     | {
         "accounts.add_user",
         "accounts.change_user",
@@ -92,6 +109,7 @@ PERMISSIONS_BY_ROLE = {
     | app_model_permissions("students", STUDENT_MODELS, "add", "change", "view")
     | app_model_permissions("teachers", TEACHER_MODELS, "add", "change", "view")
     | app_model_permissions("enrollment", ENROLLMENT_MODELS, "add", "change", "view")
+    | app_model_permissions("syllabus", SYLLABUS_MODELS, "add", "change", "view")
     | {
         "accounts.add_user",
         "accounts.change_user",
@@ -116,6 +134,7 @@ PERMISSIONS_BY_ROLE = {
         {"enrollment", "courseenrollment", "homologation"},
         "view",
     )
+    | app_model_permissions("syllabus", SYLLABUS_MODELS, "add", "change", "view")
     | {
         "accounts.view_user",
         "accounts.view_userprofile",

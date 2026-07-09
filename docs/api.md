@@ -123,3 +123,41 @@ Reglas principales:
 
 El parametro opcional `period` acepta `id` o `code`. Si no se envia, se usa el
 periodo actual y, si no existe, el periodo mas reciente.
+
+## Silabos
+
+Permisos:
+
+- Administrador, Secretaria y Direccion academica: consulta, revision,
+  aprobacion, reapertura y carga autorizada.
+- Coordinador de carrera: consulta y aprueba silabos de sus carreras.
+- Docente: crea, edita en borrador/observado, finaliza y envia silabos de sus
+  cursos asignados.
+- Estudiante: consulta silabos de sus cursos matriculados.
+
+| Metodo | Endpoint | Recurso |
+|---|---|---|
+| GET/POST | `/api/syllabi/` | Silabos por curso/paralelo. |
+| GET/PATCH/DELETE | `/api/syllabi/{id}/` | Silabo. |
+| POST | `/api/syllabi/{id}/finalize/` | Finaliza silabo con validacion de completitud. |
+| POST | `/api/syllabi/{id}/submit/` | Envia silabo finalizado a revision. |
+| POST | `/api/syllabi/{id}/approve/` | Aprueba silabo en revision. |
+| POST | `/api/syllabi/{id}/observe/` | Devuelve silabo con observacion obligatoria. |
+| POST | `/api/syllabi/{id}/reopen/` | Reabre silabo con justificacion obligatoria. |
+| POST | `/api/syllabi/{id}/upload-signed-file/` | Carga PDF firmado/aprobado. |
+| GET | `/api/syllabi/{id}/printable/` | Vista HTML imprimible del silabo. |
+| GET/POST | `/api/syllabi/competencies/` | Competencias transversales y disciplinares. |
+| GET/POST | `/api/syllabi/learning-outcomes/` | Resultados de aprendizaje de carrera/asignatura. |
+| GET/POST | `/api/syllabi/criteria/` | Criterios de evaluacion ponderados. |
+| GET/POST | `/api/syllabi/achievement-levels/` | Descriptores A/B/C/D por criterio. |
+| GET/POST | `/api/syllabi/bibliography/` | Bibliografia del silabo. |
+| GET/POST | `/api/syllabi/weekly-plans/` | Planificacion semanal. |
+
+Reglas principales:
+
+- Solo existe un silabo activo por curso; silabos archivados conservan historial.
+- Para finalizar se requieren 3 RA de carrera, 3 RA de asignatura, criterios
+  con pesos por RA que sumen 100, niveles A/B/C/D, bibliografia y planificacion.
+- El silabo aprobado bloquea edicion general; reapertura exige justificacion.
+- La carga de archivo acepta PDF y registra usuario/fecha de carga.
+- Cambios de estado y carga de archivo registran auditoria.

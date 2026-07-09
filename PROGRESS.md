@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 5 — Syllabus Management
-- **Ticket activo:** `S5-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado Sprint 4 completo (`S4-T1` a `S4-T7`)
-- **Próximo paso:** Implementar gestión de sílabos. Ver `SPRINTS/sprint-05-syllabus.md`, ticket `S5-T1`.
+- **Sprint activo:** Sprint 6 — Grading Engine S1/S2/S3
+- **Ticket activo:** `S6-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 5 completo (`S5-T1` a `S5-T8`)
+- **Próximo paso:** Implementar motor de notas S1/S2/S3. Ver `SPRINTS/sprint-06-grading-engine.md`, ticket `S6-T1`.
 
 ---
 
@@ -40,8 +40,8 @@
 - ✅ Sprint 2 — Academic Catalogs & Institutional Setup
 - ✅ Sprint 3 — People, Students & Teachers
 - ✅ Sprint 4 — Academic Offer, Courses & Enrollment
-- 🟡 **Sprint 5 — Syllabus Management**
-- ⬜ Sprint 6 — Grading Engine S1/S2/S3
+- ✅ Sprint 5 — Syllabus Management
+- 🟡 **Sprint 6 — Grading Engine S1/S2/S3**
 - ⬜ Sprint 7 — Grade Entry, Student Views & Closures
 - ⬜ Sprint 8 — Reports, Audit, QA & MVP Release  ← **MVP funcional al cerrar este sprint**
 
@@ -59,6 +59,18 @@
 ---
 
 ## Detalle de sprints
+
+### Sprint 5 — Syllabus Management
+- ✅ S5-T1 — Modelo Syllabus base
+- ✅ S5-T2 — Competencias y resultados de aprendizaje
+- ✅ S5-T3 — Rúbricas y criterios de evaluación
+- ✅ S5-T4 — Bibliografía
+- ✅ S5-T5 — Planificación semanal y experiencias de aprendizaje
+- ✅ S5-T6 — Flujo de finalización y aprobación
+- ✅ S5-T7 — Carga de sílabo firmado y archivos
+- ✅ S5-T8 — Descarga/generación de sílabo
+
+> Sprint 5 cerrado el 2026-07-09. El cursor queda en Sprint 6 / S6-T1.
 
 ### Sprint 4 — Academic Offer, Courses & Enrollment
 - ✅ S4-T1 — Oferta académica por periodo
@@ -142,6 +154,14 @@
 | 2026-07-09 | S4 | S4-T5 | `feat/s4-academic-offer-enrollment` / `4ba9090` | `pytest backend/apps/enrollment/tests/test_homologations.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | Homologaciones basicas por estudiante/asignatura/periodo con resolucion, estado y auditoria. |
 | 2026-07-09 | S4 | S4-T6 | `feat/s4-academic-offer-enrollment` / `4ba9090` | `pytest backend/apps/enrollment/tests/test_enrollment_api.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | API/Admin de oferta, cursos, asignaciones, matriculas y homologaciones con permisos por rol y bloqueo de curso cerrado. |
 | 2026-07-09 | S4 | S4-T7 | `feat/s4-academic-offer-enrollment` / `4ba9090` | `pytest backend/apps/reports/tests/test_academic_dashboard_minimal.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | Dashboard `/api/academic/dashboard/` con conteos por periodo y acceso Admin/Secretaria/Coordinador. |
+| 2026-07-09 | S5 | S5-T1 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_syllabus_model.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Modelo `Syllabus` por curso/paralelo con version nueva/legacy, estados, docente titular/codocente y silabo activo unico por curso. |
+| 2026-07-09 | S5 | S5-T2 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_learning_outcomes.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Competencias transversales/disciplinares y RA de carrera/asignatura con minimo de 3 por tipo antes de rubricas. |
+| 2026-07-09 | S5 | S5-T3 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_rubrics.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Criterios ponderados por RA, validacion de suma 100 y niveles A/B/C/D por criterio preparados para Sprint 6. |
+| 2026-07-09 | S5 | S5-T4 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_bibliography.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Bibliografia basica/complementaria/recomendada/digital editable solo en borrador u observado. |
+| 2026-07-09 | S5 | S5-T5 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_weekly_plan.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Planificacion semanal con experiencias de contacto docente, practico-experimentales y autonomas; finalizacion exige plan minimo. |
+| 2026-07-09 | S5 | S5-T6 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_syllabus_workflow.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Flujo finalizar/enviar/aprobar/observar/reabrir con auditoria y bloqueo de aprobacion del propio docente. |
+| 2026-07-09 | S5 | S5-T7 | `feat/s5-syllabus-management` | `pytest backend/apps/documents/tests/test_syllabus_upload.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Carga de PDF firmado con extension/tamano configurables, storage Django y usuario/fecha de subida auditables. |
+| 2026-07-09 | S5 | S5-T8 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_syllabus_render.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Vista HTML imprimible con datos del curso, docentes, competencias, RA, rubricas, planificacion, bibliografia y firmas. |
 | | | | | | |
 
 ---
@@ -169,6 +189,7 @@
 - Catálogos académicos Sprint 2: `AcademicPeriod`, `FacultyOrUnit`, `Modality`, `AcademicDomain`, `Career`, `StudyPlan`, `AcademicLevel`, `Subject`, `CurriculumSubject`, `CurriculumPrerequisite`, `AcademicSetting`, `AchievementLevel` y `GradingSystem`.
 - Personas Sprint 3: `Person` es el dato maestro central; `Student` y `Teacher` son perfiles OneToOne y no duplican datos personales.
 - Oferta y matricula Sprint 4: `AcademicOffer`, `CourseSection`, `TeachingAssignment`, `Enrollment`, `CourseEnrollment` y `Homologation` conectan periodo, carrera, plan, nivel, asignatura, docente y estudiante con permisos por rol y auditoria de matriculas/homologaciones.
+- Silabos Sprint 5: `Syllabus`, competencias, RA, criterios, niveles A/B/C/D, bibliografia, planificacion semanal y PDF firmado quedan asociados a `CourseSection`; el silabo aprobado habilita el contrato de bloqueo para notas en Sprint 6.
 
 ---
 
@@ -192,7 +213,7 @@
 - [x] Catálogos académicos mínimos funcionales.
 - [x] Personas, estudiantes y docentes gestionables.
 - [x] Cursos/paralelos y matrículas gestionables.
-- [ ] Sílabos nueva versión gestionables.
+- [x] Sílabos nueva versión gestionables.
 - [ ] Motor de notas S1/S2/S3 probado.
 - [ ] Registro de notas por docente.
 - [ ] Consulta de notas por estudiante.
