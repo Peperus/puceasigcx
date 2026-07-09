@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 1 — Authentication, Roles & Access Control
-- **Ticket activo:** `S1-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado Sprint 0.5 completo (`S0.5-T3` a `S0.5-T10`)
-- **Próximo paso:** Implementar Custom User institucional. Ver `SPRINTS/sprint-01-auth-roles.md`, ticket `S1-T1`.
+- **Sprint activo:** Sprint 2 — Academic Catalogs & Institutional Setup
+- **Ticket activo:** `S2-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 1 completo (`S1-T1` a `S1-T7`)
+- **Próximo paso:** Implementar catálogos académicos base. Ver `SPRINTS/sprint-02-academic-catalogs.md`, ticket `S2-T1`.
 
 ---
 
@@ -36,8 +36,8 @@
 - ✅ Sprint 0.5 — Frontend Design System & UX Foundation
 
 ### Bloque MVP — Gestión Académica
-- 🟡 **Sprint 1 — Authentication, Roles & Access Control**
-- ⬜ Sprint 2 — Academic Catalogs & Institutional Setup
+- ✅ Sprint 1 — Authentication, Roles & Access Control
+- 🟡 **Sprint 2 — Academic Catalogs & Institutional Setup**
 - ⬜ Sprint 3 — People, Students & Teachers
 - ⬜ Sprint 4 — Academic Offer, Courses & Enrollment
 - ⬜ Sprint 5 — Syllabus Management
@@ -60,19 +60,16 @@
 
 ## Detalle del sprint activo
 
-### Sprint 0.5 — Frontend Design System & UX Foundation
-- ✅ S0.5-T1 — Crear estructura frontend base
-- ✅ S0.5-T2 — Definir tema visual institucional y tokens de diseño
-- ✅ S0.5-T3 — Crear componentes UI reutilizables
-- ✅ S0.5-T4 — Layout institucional autenticado y navegación por rol
-- ✅ S0.5-T5 — Prototipos de autenticación y páginas públicas
-- ✅ S0.5-T6 — Dashboards prototipo por rol
-- ✅ S0.5-T7 — Wireframes navegables de módulos del MVP
-- ✅ S0.5-T8 — Prototipo específico del constructor de sílabos
-- ✅ S0.5-T9 — Prototipo específico de gestión de notas S1/S2/S3
-- ✅ S0.5-T10 — Documentación de diseño y handoff para sprints funcionales
+### Sprint 1 — Authentication, Roles & Access Control
+- ✅ S1-T1 — Custom User institucional
+- ✅ S1-T2 — Roles institucionales base
+- ✅ S1-T3 — Login JWT y refresh
+- ✅ S1-T4 — Recuperación de contraseña segura
+- ✅ S1-T5 — Permission classes DRF por rol
+- ✅ S1-T6 — Perfil actual y sesión institucional
+- ✅ S1-T7 — Auditoría base de autenticación y roles
 
-> Sprint 0 cerrado el 2026-07-08. El frontend debe fijarse en Sprint 0.5 antes de iniciar Sprint 1.
+> Sprint 1 cerrado el 2026-07-09. El cursor queda en Sprint 2 / S2-T1.
 
 ---
 
@@ -92,6 +89,7 @@
 | 2026-07-09 | S0.5 | S0.5-T1 | `feat/s0-5-t1-frontend-base` | `npm install`; `npm run lint`; `npm run typecheck`; `npm run build` | Frontend Next.js + TypeScript + Tailwind creado en `/frontend`; npm audit reporta 2 vulnerabilidades moderadas de dependencias transitivas |
 | 2026-07-09 | S0.5 | S0.5-T2 | `feat/s0-5-t2-theme-tokens` | navegacion visual en `https://www.puce.edu.ec/`; `npm run lint`; `npm run typecheck`; `npm run build`; verificacion local `http://127.0.0.1:3000` | Tema institucional centralizado en tokens; documentacion inicial en `docs/frontend-design-system.md`; sin logos oficiales ni assets copiados |
 | 2026-07-09 | S0.5 | S0.5-T3 a S0.5-T10 | `feat/s0-5-ux-foundation-complete` | `npm run lint`; `npm run typecheck`; `npm run build` | Componentes UI, layout autenticado, navegacion por rol, auth publica, dashboards, wireframes MVP, constructor de silabos, notas S1/S2/S3 y handoff documentado; `npm install lucide-react` mantiene 2 vulnerabilidades moderadas transitivas |
+| 2026-07-09 | S1 | S1-T1 a S1-T7 | `feat/s1-auth-roles` | `manage.py check`; `manage.py makemigrations accounts audit`; `manage.py migrate`; `createsuperuser --noinput`; `manage.py seed_roles`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Usuario institucional custom, roles Django Groups, JWT login/refresh/logout, password reset, `/api/me/`, permissions DRF y auditoria base implementados; base SQLite previa respaldada como `backend/db.sqlite3.pre-s1-backup-*` por cambio de `AUTH_USER_MODEL` |
 | | | | | | |
 
 ---
@@ -135,7 +133,7 @@
 - [x] Backend Django ejecutable localmente.
 - [x] Frontend Next.js creado y compilando.
 - [x] Design system institucional documentado.
-- [ ] Roles institucionales configurados.
+- [x] Roles institucionales configurados.
 - [ ] Catálogos académicos mínimos funcionales.
 - [ ] Personas, estudiantes y docentes gestionables.
 - [ ] Cursos/paralelos y matrículas gestionables.
