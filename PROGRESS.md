@@ -17,9 +17,9 @@
 ## 📍 Cursor actual
 
 - **Sprint activo:** Sprint 0.5 — Frontend Design System & UX Foundation
-- **Ticket activo:** `S0.5-T2` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado `S0.5-T1`
-- **Próximo paso:** Definir tema visual institucional y tokens de diseño. Ver `SPRINTS/sprint-00-5-frontend-design-system.md`, ticket `S0.5-T2`.
+- **Ticket activo:** `S0.5-T3` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado `S0.5-T2`
+- **Próximo paso:** Crear componentes UI reutilizables. Ver `SPRINTS/sprint-00-5-frontend-design-system.md`, ticket `S0.5-T3`.
 
 ---
 
@@ -62,7 +62,7 @@
 
 ### Sprint 0.5 — Frontend Design System & UX Foundation
 - ✅ S0.5-T1 — Crear estructura frontend base
-- ⬜ S0.5-T2 — Definir tema visual institucional y tokens de diseño
+- ✅ S0.5-T2 — Definir tema visual institucional y tokens de diseño
 - ⬜ S0.5-T3 — Crear componentes UI reutilizables
 - ⬜ S0.5-T4 — Layout institucional autenticado y navegación por rol
 - ⬜ S0.5-T5 — Prototipos de autenticación y páginas públicas
@@ -90,6 +90,7 @@
 | 2026-07-08 | S0 | S0-T7 | `f0b7029` | `manage.py check --deploy`; `pytest backend/apps/core`; `ruff check`; `black --check`; `curl /api/health/` | JWT, CORS y throttling configurados; healthcheck sigue publico |
 | 2026-07-08 | S0 | S0-T8 | `2b1bf1a` | `pytest`; `manage.py check`; `curl /api/health/`; `curl /api/version/`; `ruff check`; `black --check` | Apps MVP con estructura consistente, routers base y convencion documentada |
 | 2026-07-09 | S0.5 | S0.5-T1 | `feat/s0-5-t1-frontend-base` | `npm install`; `npm run lint`; `npm run typecheck`; `npm run build` | Frontend Next.js + TypeScript + Tailwind creado en `/frontend`; npm audit reporta 2 vulnerabilidades moderadas de dependencias transitivas |
+| 2026-07-09 | S0.5 | S0.5-T2 | `feat/s0-5-t2-theme-tokens` | navegacion visual en `https://www.puce.edu.ec/`; `npm run lint`; `npm run typecheck`; `npm run build`; verificacion local `http://127.0.0.1:3000` | Tema institucional centralizado en tokens; documentacion inicial en `docs/frontend-design-system.md`; sin logos oficiales ni assets copiados |
 | | | | | | |
 
 ---
@@ -103,6 +104,7 @@
 - Frontend del MVP: Next.js + TypeScript + Tailwind CSS.
 - Sprint específico de frontend: Sprint 0.5 — Frontend Design System & UX Foundation, antes de Sprint 1.
 - Gestor de paquetes frontend inicial: npm.
+- Tema visual frontend inspirado en el sitio público de PUCE revisado el 2026-07-09: azul institucional, turquesa/celeste de apoyo, blanco y grises neutros; sin copiar logos ni assets oficiales.
 - Django Admin: herramienta interna auxiliar para administración, soporte y carga inicial; no será el frontend principal del MVP.
 - Componentes UI frontend: shadcn/ui o componentes propios equivalentes, centralizados y reutilizables.
 - Formularios frontend: React Hook Form + Zod cuando existan formularios funcionales.
