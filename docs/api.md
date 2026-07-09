@@ -45,3 +45,36 @@ Permisos:
 
 Las operaciones `PATCH`, `PUT` y `DELETE` se exponen en la ruta de detalle de
 cada recurso y mantienen la misma politica de permisos.
+
+## Personas, Estudiantes y Docentes
+
+Permisos:
+
+- Administrador y Secretaria: crean y editan personas, estudiantes y docentes.
+- Coordinador de carrera y Direccion academica: consulta segun alcance
+  academico disponible.
+- Docente: consulta su propio perfil de persona/docente.
+- Estudiante: consulta su propio perfil de persona/estudiante.
+- Docente no consulta listados de estudiantes hasta existir alcance por curso en
+  Sprint 4.
+
+| Metodo | Endpoint | Recurso |
+|---|---|---|
+| GET/POST | `/api/people/` | Personas. |
+| GET/PATCH/DELETE | `/api/people/{id}/` | Persona. |
+| GET/POST | `/api/students/` | Estudiantes. |
+| GET/PATCH/DELETE | `/api/students/{id}/` | Estudiante. |
+| GET/POST | `/api/teachers/` | Docentes. |
+| GET/PATCH/DELETE | `/api/teachers/{id}/` | Docente. |
+| GET/POST | `/api/teachers/office-hours/` | Horarios de atencion docente. |
+| GET/PATCH/DELETE | `/api/teachers/office-hours/{id}/` | Horario de atencion docente. |
+
+Importacion administrativa:
+
+```bash
+python backend/manage.py import_people_csv ruta/al/archivo.csv --user-email admin@example.edu
+```
+
+El CSV debe ser sintetico, no debe guardarse en Git y reporta creados,
+actualizados y rechazados. La importacion registra auditoria con accion
+`people_imported`.

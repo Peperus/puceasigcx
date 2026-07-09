@@ -143,8 +143,8 @@ pytest apps/people/tests/test_import_people.py
 
 ## Cierre del Sprint 3
 
-- [ ] Person central implementado.
-- [ ] Student y Teacher funcionales.
-- [ ] Permisos probados.
-- [ ] `docs/database-model.md` actualizado.
-- [ ] Cursor a **Sprint 4 / S4-T1**.
+- [x] Person central implementado.
+- [x] Student y Teacher funcionales.
+- [x] Permisos probados.
+- [x] `docs/database-model.md` actualizado.
+- [x] Cursor a **Sprint 4 / S4-T1**.

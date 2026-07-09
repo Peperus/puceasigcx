@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 3 — People, Students & Teachers
-- **Ticket activo:** `S3-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado Sprint 2 completo (`S2-T1` a `S2-T7`)
-- **Próximo paso:** Implementar núcleo de personas. Ver `SPRINTS/sprint-03-people-students-teachers.md`, ticket `S3-T1`.
+- **Sprint activo:** Sprint 4 — Academic Offer, Courses & Enrollment
+- **Ticket activo:** `S4-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 3 completo (`S3-T1` a `S3-T6`)
+- **Próximo paso:** Implementar oferta académica. Ver `SPRINTS/sprint-04-academic-offer-enrollment.md`, ticket `S4-T1`.
 
 ---
 
@@ -38,8 +38,8 @@
 ### Bloque MVP — Gestión Académica
 - ✅ Sprint 1 — Authentication, Roles & Access Control
 - ✅ Sprint 2 — Academic Catalogs & Institutional Setup
-- 🟡 **Sprint 3 — People, Students & Teachers**
-- ⬜ Sprint 4 — Academic Offer, Courses & Enrollment
+- ✅ Sprint 3 — People, Students & Teachers
+- 🟡 **Sprint 4 — Academic Offer, Courses & Enrollment**
 - ⬜ Sprint 5 — Syllabus Management
 - ⬜ Sprint 6 — Grading Engine S1/S2/S3
 - ⬜ Sprint 7 — Grade Entry, Student Views & Closures
@@ -58,7 +58,17 @@
 
 ---
 
-## Detalle del sprint activo
+## Detalle de sprints
+
+### Sprint 3 — People, Students & Teachers
+- ✅ S3-T1 — Modelo Person central
+- ✅ S3-T2 — Modelo Student
+- ✅ S3-T3 — Modelo Teacher
+- ✅ S3-T4 — Horarios de atención docente
+- ✅ S3-T5 — API/Admin de personas, estudiantes y docentes
+- ✅ S3-T6 — Importación controlada desde CSV
+
+> Sprint 3 cerrado el 2026-07-09. El cursor queda en Sprint 4 / S4-T1.
 
 ### Sprint 2 — Academic Catalogs & Institutional Setup
 - ✅ S2-T1 — Modelos de periodos académicos
@@ -108,6 +118,12 @@
 | 2026-07-09 | S2 | S2-T5 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_academic_settings.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Configuración académica 0-50, umbral 30, niveles A/B/C/D y catálogo S1/S2/S3 consultable por servicio. |
 | 2026-07-09 | S2 | S2-T6 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_catalog_api.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | API `/api/academic/` protegida por roles, admin con filtros/búsqueda y `docs/api.md` creado. |
 | 2026-07-09 | S2 | S2-T7 | `feat/s2-academic-catalogs` | `manage.py seed_academic_catalogs`; `manage.py seed_academic_catalogs`; `pytest backend/apps/academic_catalogs/tests/test_seeds.py`; `pytest`; `manage.py seed_roles` | Seed sintético idempotente para catálogos base; roles sincronizados con permisos Django Admin de catálogos. |
+| 2026-07-09 | S3 | S3-T1 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_person_model.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | `Person` central con identificacion unica opcional, relacion opcional con usuario y admin con busqueda. |
+| 2026-07-09 | S3 | S3-T2 | `feat/s3-people-students-teachers` | `pytest backend/apps/students/tests/test_student_model.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Perfil `Student` OneToOne con `Person`, codigo unico, carrera, plan, periodo de ingreso y estados academicos. |
+| 2026-07-09 | S3 | S3-T3 | `feat/s3-people-students-teachers` | `pytest backend/apps/teachers/tests/test_teacher_model.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Perfil `Teacher` OneToOne con `Person`, datos para silabo, estado y dominios/areas. |
+| 2026-07-09 | S3 | S3-T4 | `feat/s3-people-students-teachers` | `pytest backend/apps/teachers/tests/test_office_hours.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Horarios de atencion docente presenciales/virtuales con validacion de rango horario. |
+| 2026-07-09 | S3 | S3-T5 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_people_api.py`; `pytest backend/apps/students/tests/test_students_api.py`; `pytest backend/apps/teachers/tests/test_teachers_api.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | API/Admin de personas, estudiantes y docentes protegida por roles; perfiles propios para docente/estudiante. |
+| 2026-07-09 | S3 | S3-T6 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_import_people.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | Importacion CSV sintetica tolerante a errores, con resumen de creados/actualizados/rechazados y auditoria `people_imported`. |
 | | | | | | |
 
 ---
@@ -133,6 +149,7 @@
 - Auditoría obligatoria para notas, sílabos, matrículas, roles y cambios críticos.
 - Sistemas de notas del MVP: S1, S2 y S3 como motor de reglas probado, no como fórmulas copiadas de Excel.
 - Catálogos académicos Sprint 2: `AcademicPeriod`, `FacultyOrUnit`, `Modality`, `AcademicDomain`, `Career`, `StudyPlan`, `AcademicLevel`, `Subject`, `CurriculumSubject`, `CurriculumPrerequisite`, `AcademicSetting`, `AchievementLevel` y `GradingSystem`.
+- Personas Sprint 3: `Person` es el dato maestro central; `Student` y `Teacher` son perfiles OneToOne y no duplican datos personales.
 
 ---
 
@@ -154,7 +171,7 @@
 - [x] Design system institucional documentado.
 - [x] Roles institucionales configurados.
 - [x] Catálogos académicos mínimos funcionales.
-- [ ] Personas, estudiantes y docentes gestionables.
+- [x] Personas, estudiantes y docentes gestionables.
 - [ ] Cursos/paralelos y matrículas gestionables.
 - [ ] Sílabos nueva versión gestionables.
 - [ ] Motor de notas S1/S2/S3 probado.

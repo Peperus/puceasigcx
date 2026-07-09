@@ -25,8 +25,16 @@ Campos sugeridos:
 
 Relaciones:
 
-- Una persona puede estar asociada a un usuario.
+- Una persona puede estar asociada opcionalmente a un usuario mediante
+  `Person.user`.
 - Una persona puede tener perfil de estudiante, docente o ambos si aplica institucionalmente.
+
+Implementado en Sprint 3:
+
+- `identification_number` es unico cuando esta presente.
+- La busqueda administrativa cubre identificacion, nombres y correos.
+- El registro permite personas sin identificacion inicial para casos
+  controlados de carga o regularizacion.
 
 ### UserProfile
 
@@ -222,7 +230,7 @@ Roles sugeridos:
 
 Perfil academico de una persona como estudiante.
 
-Campos sugeridos:
+Campos implementados en Sprint 3:
 
 - `person`
 - `career`
@@ -230,6 +238,24 @@ Campos sugeridos:
 - `admission_period`
 - `student_code`
 - `status`
+- `admission_date`
+- `observations`
+
+Estados:
+
+- `aspirante_convertido`
+- `activo`
+- `retirado`
+- `egresado`
+- `graduado`
+- `suspendido`
+- `archivado`
+
+Reglas:
+
+- Una persona tiene como maximo un perfil de estudiante.
+- `student_code` es unico.
+- El plan de estudio debe pertenecer a la carrera principal.
 
 ### Enrollment
 
@@ -254,7 +280,7 @@ Estados sugeridos:
 
 Perfil academico de una persona como docente.
 
-Campos sugeridos:
+Campos implementados en Sprint 3:
 
 - `person`
 - `teacher_code`
@@ -263,10 +289,38 @@ Campos sugeridos:
 - `academic_bio`
 - `institutional_phone`
 - `status`
+- `domains`
+
+Estados:
+
+- `activo`
+- `inactivo`
+- `invitado`
+- `codocente`
+- `externo`
+
+Reglas:
+
+- Una persona tiene como maximo un perfil docente.
+- `teacher_code` es unico.
+- El perfil guarda datos base usados por silabos.
 
 ### TeacherOfficeHour
 
 Horario de tutoria presencial o virtual.
+
+Campos implementados:
+
+- `teacher`
+- `modality`: presencial o virtual.
+- `day_of_week`
+- `start_time`
+- `end_time`
+- `location_or_link`
+
+Regla:
+
+- `start_time` debe ser menor que `end_time`.
 
 ## Silabos
 

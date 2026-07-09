@@ -24,6 +24,10 @@ ACADEMIC_CATALOG_MODELS = {
     "subject",
 }
 
+PEOPLE_MODELS = {"person"}
+STUDENT_MODELS = {"student"}
+TEACHER_MODELS = {"teacher", "teacherofficehour"}
+
 
 def catalog_permissions(*actions):
     return {
@@ -33,8 +37,29 @@ def catalog_permissions(*actions):
     }
 
 
+def app_model_permissions(app_label, models, *actions):
+    return {f"{app_label}.{action}_{model}" for action in actions for model in models}
+
+
 PERMISSIONS_BY_ROLE = {
     ROLE_ADMINISTRATOR: catalog_permissions("add", "change", "delete", "view")
+    | app_model_permissions("people", PEOPLE_MODELS, "add", "change", "delete", "view")
+    | app_model_permissions(
+        "students",
+        STUDENT_MODELS,
+        "add",
+        "change",
+        "delete",
+        "view",
+    )
+    | app_model_permissions(
+        "teachers",
+        TEACHER_MODELS,
+        "add",
+        "change",
+        "delete",
+        "view",
+    )
     | {
         "accounts.add_user",
         "accounts.change_user",
@@ -47,6 +72,9 @@ PERMISSIONS_BY_ROLE = {
         "audit.view_auditlog",
     },
     ROLE_SECRETARY: catalog_permissions("add", "change", "view")
+    | app_model_permissions("people", PEOPLE_MODELS, "add", "change", "view")
+    | app_model_permissions("students", STUDENT_MODELS, "add", "change", "view")
+    | app_model_permissions("teachers", TEACHER_MODELS, "add", "change", "view")
     | {
         "accounts.add_user",
         "accounts.change_user",
@@ -56,6 +84,9 @@ PERMISSIONS_BY_ROLE = {
         "audit.view_auditlog",
     },
     ROLE_CAREER_COORDINATOR: catalog_permissions("view")
+    | app_model_permissions("people", PEOPLE_MODELS, "view")
+    | app_model_permissions("students", STUDENT_MODELS, "view")
+    | app_model_permissions("teachers", TEACHER_MODELS, "view")
     | {
         "accounts.view_user",
         "accounts.view_userprofile",
