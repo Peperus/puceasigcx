@@ -189,8 +189,8 @@ grep -n "S1\|S2\|S3\|pendiente" docs/grading-rules.md docs/grading-engine.md
 
 ## Cierre del Sprint 6
 
-- [ ] Motores S1, S2 y S3 implementados.
-- [ ] Casos límite probados.
-- [ ] Auditoría de notas lista.
-- [ ] `docs/grading-rules.md` actualizado.
-- [ ] Cursor a **Sprint 7 / S7-T1**.
+- [x] Motores S1, S2 y S3 implementados.
+- [x] Casos límite probados.
+- [x] Auditoría de notas lista.
+- [x] `docs/grading-rules.md` actualizado.
+- [x] Cursor a **Sprint 7 / S7-T1**.

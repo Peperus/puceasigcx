@@ -25,6 +25,14 @@ Reglas generales:
 
 S1 trabaja con resultados de aprendizaje, usualmente 3 RDA. Cada RDA contiene criterios ponderados y cada criterio puede contener una o mas actividades.
 
+Implementacion Sprint 6:
+
+- El motor recibe RDA con criterios ponderados y actividades opcionales.
+- Si un criterio tiene actividades, usa el promedio de esas actividades.
+- Si un criterio no tiene actividades, usa la nota directa del criterio.
+- Las ponderaciones de criterios se validan contra 100%.
+- La nota final del curso es el promedio de los RDA finales.
+
 ### Calculo por criterio
 
 - Si un criterio tiene varias actividades, su nota es el promedio de actividades validas.
@@ -60,7 +68,9 @@ si nota_rda < 30:
     nota_rda_final = min(nota_rda + aporte_recuperacion, 30)
 ```
 
-El porcentaje o formula exacta del aporte debe quedar parametrizado, no hardcodeado.
+El aporte inicial de recuperacion queda parametrizado como
+`s1_recovery_contribution`, con valor por defecto 15%. El tope tambien es
+configurable y por defecto no permite superar 30 en el RDA recuperado.
 
 ### Estado final S1
 
@@ -71,6 +81,13 @@ El porcentaje o formula exacta del aporte debe quedar parametrizado, no hardcode
 ## Sistema S2: resultados de aprendizaje con tolerancia de un RDA
 
 S2 tambien trabaja con resultados de aprendizaje y criterios ponderados. La diferencia principal esta en la regla de recuperacion.
+
+Implementacion Sprint 6:
+
+- Usa la misma estructura de RDA, criterios y actividades que S1.
+- Cuenta RDA perdidos antes de aplicar recuperacion.
+- Con un RDA perdido deja el resultado en `RECUPERACION_REQUERIDA` hasta que se registre nota de recuperacion.
+- Con dos o mas RDA perdidos reprueba sin recuperacion ordinaria.
 
 ### Conteo de RDA perdidos
 
@@ -106,6 +123,14 @@ La recuperacion S2 no debe producir una nota superior a 30 para el RDA recuperad
 ## Sistema S3: silabo antiguo por parciales
 
 S3 trabaja con 3 parciales. Cada parcial combina actividades practicas ponderadas y una evaluacion.
+
+Implementacion Sprint 6:
+
+- Cada parcial recibe actividades practicas ponderadas y una evaluacion.
+- Por defecto, practica y evaluacion pesan 50% cada una.
+- Las ponderaciones de actividades practicas deben sumar 100%.
+- La nota final previa es el promedio de los 3 parciales.
+- Si la nota previa es menor que 30, se habilita cuarta evaluacion.
 
 ### Practica del parcial
 
@@ -149,6 +174,10 @@ La cuarta evaluacion debe aplicarse como regla configurable. La implementacion i
 
 Ningun calculo S3 debe depender de una hoja Excel en produccion.
 
+Regla inicial Sprint 6: una cuarta evaluacion con nota mayor o igual a 30
+aprueba la asignatura con nota final 30. Una cuarta evaluacion menor que 30
+deja el curso reprobado.
+
 ## Auditoria y bloqueo
 
 Para los tres sistemas:
@@ -158,6 +187,16 @@ Para los tres sistemas:
 - Toda reapertura requiere permiso especial y justificacion.
 - El sistema debe conservar datos anteriores y nuevos en auditoria.
 - Los cierres de gradebook deben validar notas completas, pesos validos y estados finales calculados.
+- Los servicios de Sprint 6 bloquean cambios normales cuando el libro esta cerrado.
+- La reapertura de un libro exige justificacion y queda auditada.
+- La correccion autorizada sobre un libro cerrado exige justificacion.
+
+## Aspectos pendientes de confirmacion institucional
+
+- Politica exacta para diferenciar `INTERSEMESTRAL` y `REPROBADO` en S1 cuando un RDA no se recupera.
+- Formula oficial definitiva del aporte de recuperacion S1 si difiere del 15% inicial.
+- Si la cuarta evaluacion S3 siempre capea la nota final en 30 o si puede recalcularse con otra ponderacion.
+- Fechas institucionales de apertura/cierre de notas y permisos excepcionales por rol.
 
 ## Pruebas minimas esperadas
 

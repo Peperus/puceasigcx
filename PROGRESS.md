@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 6 — Grading Engine S1/S2/S3
-- **Ticket activo:** `S6-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado Sprint 5 completo (`S5-T1` a `S5-T8`)
-- **Próximo paso:** Implementar motor de notas S1/S2/S3. Ver `SPRINTS/sprint-06-grading-engine.md`, ticket `S6-T1`.
+- **Sprint activo:** Sprint 7 — Grade Entry, Student Views & Closures
+- **Ticket activo:** `S7-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 6 completo (`S6-T1` a `S6-T8`)
+- **Próximo paso:** Implementar flujos de ingreso y consulta de notas. Ver `SPRINTS/sprint-07-grades-ui-workflows.md`, ticket `S7-T1`.
 
 ---
 
@@ -41,8 +41,8 @@
 - ✅ Sprint 3 — People, Students & Teachers
 - ✅ Sprint 4 — Academic Offer, Courses & Enrollment
 - ✅ Sprint 5 — Syllabus Management
-- 🟡 **Sprint 6 — Grading Engine S1/S2/S3**
-- ⬜ Sprint 7 — Grade Entry, Student Views & Closures
+- ✅ Sprint 6 — Grading Engine S1/S2/S3
+- 🟡 **Sprint 7 — Grade Entry, Student Views & Closures**
 - ⬜ Sprint 8 — Reports, Audit, QA & MVP Release  ← **MVP funcional al cerrar este sprint**
 
 ### Bloque Escalamiento ERP/SIG posterior al MVP
@@ -59,6 +59,18 @@
 ---
 
 ## Detalle de sprints
+
+### Sprint 6 — Grading Engine S1/S2/S3
+- ✅ S6-T1 — Modelos base de libro de calificaciones
+- ✅ S6-T2 — Servicio común de escala y niveles A/B/C/D
+- ✅ S6-T3 — Motor S1 por resultados de aprendizaje
+- ✅ S6-T4 — Motor S2 por resultados de aprendizaje con tolerancia de un RA
+- ✅ S6-T5 — Motor S3 sílabo anterior: práctica + evaluación
+- ✅ S6-T6 — Persistencia de resultados calculados
+- ✅ S6-T7 — Auditoría de cambios de notas
+- ✅ S6-T8 — Documentación técnica del motor
+
+> Sprint 6 cerrado el 2026-07-09. El cursor queda en Sprint 7 / S7-T1.
 
 ### Sprint 5 — Syllabus Management
 - ✅ S5-T1 — Modelo Syllabus base
@@ -162,6 +174,14 @@
 | 2026-07-09 | S5 | S5-T6 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_syllabus_workflow.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Flujo finalizar/enviar/aprobar/observar/reabrir con auditoria y bloqueo de aprobacion del propio docente. |
 | 2026-07-09 | S5 | S5-T7 | `feat/s5-syllabus-management` | `pytest backend/apps/documents/tests/test_syllabus_upload.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Carga de PDF firmado con extension/tamano configurables, storage Django y usuario/fecha de subida auditables. |
 | 2026-07-09 | S5 | S5-T8 | `feat/s5-syllabus-management` | `pytest backend/apps/syllabus/tests/test_syllabus_render.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Vista HTML imprimible con datos del curso, docentes, competencias, RA, rubricas, planificacion, bibliografia y firmas. |
+| 2026-07-09 | S6 | S6-T1 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_gradebook_model.py` | `Gradebook`, `GradeItem` y `StudentGradeRecord` asociados a curso, silabo aprobado y matricula activa; migracion `grading.0001_initial`. |
+| 2026-07-09 | S6 | S6-T2 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_grade_scale.py` | Servicio `letter_from_score` con escala 0-50, letras A/B/C/D y bordes probados. |
+| 2026-07-09 | S6 | S6-T3 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_s1_engine.py` | Motor S1 estricto por RA, criterios ponderados, recuperacion con aporte configurable y cap a 30. |
+| 2026-07-09 | S6 | S6-T4 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_s2_engine.py` | Motor S2 con tolerancia de un RA, recuperacion requerida y reprobacion con dos o mas RA perdidos. |
+| 2026-07-09 | S6 | S6-T5 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_s3_engine.py` | Motor S3 con tres parciales, practica/evaluacion, cuarta evaluacion y estados finales. |
+| 2026-07-09 | S6 | S6-T6 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_grade_snapshots.py` | `GradeCalculationSnapshot` guarda resultado, regla, fuente, usuario y conserva historial al recalcular. |
+| 2026-07-09 | S6 | S6-T7 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_grade_audit.py` | Auditoria de creacion, modificacion, eliminacion logica y reapertura; bloqueo de libros cerrados. |
+| 2026-07-09 | S6 | S6-T8 | `feat/s6-grading-engine` | `Select-String "S1|S2|S3|pendiente" docs/grading-rules.md docs/grading-engine.md` | Documentados modelos, servicios, casos borde y pendientes institucionales del motor. |
 | | | | | | |
 
 ---
@@ -190,6 +210,7 @@
 - Personas Sprint 3: `Person` es el dato maestro central; `Student` y `Teacher` son perfiles OneToOne y no duplican datos personales.
 - Oferta y matricula Sprint 4: `AcademicOffer`, `CourseSection`, `TeachingAssignment`, `Enrollment`, `CourseEnrollment` y `Homologation` conectan periodo, carrera, plan, nivel, asignatura, docente y estudiante con permisos por rol y auditoria de matriculas/homologaciones.
 - Silabos Sprint 5: `Syllabus`, competencias, RA, criterios, niveles A/B/C/D, bibliografia, planificacion semanal y PDF firmado quedan asociados a `CourseSection`; el silabo aprobado habilita el contrato de bloqueo para notas en Sprint 6.
+- Motor de notas Sprint 6: `Gradebook`, `GradeItem`, `StudentGradeRecord` y `GradeCalculationSnapshot` implementan S1/S2/S3 como servicios de dominio probados, con snapshots reproducibles, auditoria de cambios y bloqueo de libros cerrados.
 
 ---
 
@@ -214,7 +235,7 @@
 - [x] Personas, estudiantes y docentes gestionables.
 - [x] Cursos/paralelos y matrículas gestionables.
 - [x] Sílabos nueva versión gestionables.
-- [ ] Motor de notas S1/S2/S3 probado.
+- [x] Motor de notas S1/S2/S3 probado.
 - [ ] Registro de notas por docente.
 - [ ] Consulta de notas por estudiante.
 - [ ] Reportes básicos de secretaría/coordinación.
