@@ -73,12 +73,13 @@ export function AppShell({ children }: { children: ReactNode }) {
               <Link
                 className={cn(
                   "flex min-h-11 items-center gap-3 rounded-puce-sm px-3 text-sm font-bold transition-colors",
-                  active ? "bg-white text-puce-blue" : "text-blue-50 hover:bg-white/10",
+                  active ? "bg-white font-black shadow-puce-xs" : "text-blue-50 hover:bg-white/10",
                 )}
                 href={`${item.href}?role=${role}`}
                 key={item.href}
+                style={active ? { color: "var(--color-brand-primary)" } : undefined}
               >
-                <Icon size={18} />
+                <Icon className="shrink-0" size={18} />
                 {item.label}
               </Link>
             );
