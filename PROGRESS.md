@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 4 — Academic Offer, Courses & Enrollment
-- **Ticket activo:** `S4-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado Sprint 3 completo (`S3-T1` a `S3-T6`)
-- **Próximo paso:** Implementar oferta académica. Ver `SPRINTS/sprint-04-academic-offer-enrollment.md`, ticket `S4-T1`.
+- **Sprint activo:** Sprint 5 — Syllabus Management
+- **Ticket activo:** `S5-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 4 completo (`S4-T1` a `S4-T7`)
+- **Próximo paso:** Implementar gestión de sílabos. Ver `SPRINTS/sprint-05-syllabus.md`, ticket `S5-T1`.
 
 ---
 
@@ -39,8 +39,8 @@
 - ✅ Sprint 1 — Authentication, Roles & Access Control
 - ✅ Sprint 2 — Academic Catalogs & Institutional Setup
 - ✅ Sprint 3 — People, Students & Teachers
-- 🟡 **Sprint 4 — Academic Offer, Courses & Enrollment**
-- ⬜ Sprint 5 — Syllabus Management
+- ✅ Sprint 4 — Academic Offer, Courses & Enrollment
+- 🟡 **Sprint 5 — Syllabus Management**
 - ⬜ Sprint 6 — Grading Engine S1/S2/S3
 - ⬜ Sprint 7 — Grade Entry, Student Views & Closures
 - ⬜ Sprint 8 — Reports, Audit, QA & MVP Release  ← **MVP funcional al cerrar este sprint**
@@ -59,6 +59,17 @@
 ---
 
 ## Detalle de sprints
+
+### Sprint 4 — Academic Offer, Courses & Enrollment
+- ✅ S4-T1 — Oferta académica por periodo
+- ✅ S4-T2 — Cursos/paralelos
+- ✅ S4-T3 — Asignación docente
+- ✅ S4-T4 — Matrícula académica
+- ✅ S4-T5 — Homologaciones y casos especiales mínimos
+- ✅ S4-T6 — API/Admin de oferta y matrícula
+- ✅ S4-T7 — Dashboard académico mínimo
+
+> Sprint 4 cerrado el 2026-07-09. El cursor queda en Sprint 5 / S5-T1.
 
 ### Sprint 3 — People, Students & Teachers
 - ✅ S3-T1 — Modelo Person central
@@ -124,6 +135,13 @@
 | 2026-07-09 | S3 | S3-T4 | `feat/s3-people-students-teachers` | `pytest backend/apps/teachers/tests/test_office_hours.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Horarios de atencion docente presenciales/virtuales con validacion de rango horario. |
 | 2026-07-09 | S3 | S3-T5 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_people_api.py`; `pytest backend/apps/students/tests/test_students_api.py`; `pytest backend/apps/teachers/tests/test_teachers_api.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | API/Admin de personas, estudiantes y docentes protegida por roles; perfiles propios para docente/estudiante. |
 | 2026-07-09 | S3 | S3-T6 | `feat/s3-people-students-teachers` | `pytest backend/apps/people/tests/test_import_people.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | Importacion CSV sintetica tolerante a errores, con resumen de creados/actualizados/rechazados y auditoria `people_imported`. |
+| 2026-07-09 | S4 | S4-T1 | `feat/s4-academic-offer-enrollment` | `pytest backend/apps/enrollment/tests/test_academic_offer.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Oferta academica por periodo, carrera, plan y nivel con estados y unicidad critica. |
+| 2026-07-09 | S4 | S4-T2 | `feat/s4-academic-offer-enrollment` | `pytest backend/apps/enrollment/tests/test_course_sections.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Cursos/paralelos con cupo, modalidad, sistema S1/S2/S3 y rechazo de duplicados por oferta/asignatura/paralelo. |
+| 2026-07-09 | S4 | S4-T3 | `feat/s4-academic-offer-enrollment` | `pytest backend/apps/enrollment/tests/test_teaching_assignments.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Asignacion docente con titular/codocente, docente activo, titular unico y visibilidad por docente/coordinador. |
+| 2026-07-09 | S4 | S4-T4 | `feat/s4-academic-offer-enrollment` | `pytest backend/apps/enrollment/tests/test_enrollment.py`; `pytest`; `manage.py check`; `manage.py migrate`; `ruff check .`; `black --check .`; `isort --check .` | Matricula academica por estudiante/periodo e inscripcion en cursos con validacion de cupos, duplicados y curso activo. |
+| 2026-07-09 | S4 | S4-T5 | `feat/s4-academic-offer-enrollment` | `pytest backend/apps/enrollment/tests/test_homologations.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | Homologaciones basicas por estudiante/asignatura/periodo con resolucion, estado y auditoria. |
+| 2026-07-09 | S4 | S4-T6 | `feat/s4-academic-offer-enrollment` | `pytest backend/apps/enrollment/tests/test_enrollment_api.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | API/Admin de oferta, cursos, asignaciones, matriculas y homologaciones con permisos por rol y bloqueo de curso cerrado. |
+| 2026-07-09 | S4 | S4-T7 | `feat/s4-academic-offer-enrollment` | `pytest backend/apps/reports/tests/test_academic_dashboard_minimal.py`; `pytest`; `manage.py check`; `manage.py migrate`; `manage.py seed_roles`; `ruff check .`; `black --check .`; `isort --check .` | Dashboard `/api/academic/dashboard/` con conteos por periodo y acceso Admin/Secretaria/Coordinador. |
 | | | | | | |
 
 ---
@@ -150,6 +168,7 @@
 - Sistemas de notas del MVP: S1, S2 y S3 como motor de reglas probado, no como fórmulas copiadas de Excel.
 - Catálogos académicos Sprint 2: `AcademicPeriod`, `FacultyOrUnit`, `Modality`, `AcademicDomain`, `Career`, `StudyPlan`, `AcademicLevel`, `Subject`, `CurriculumSubject`, `CurriculumPrerequisite`, `AcademicSetting`, `AchievementLevel` y `GradingSystem`.
 - Personas Sprint 3: `Person` es el dato maestro central; `Student` y `Teacher` son perfiles OneToOne y no duplican datos personales.
+- Oferta y matricula Sprint 4: `AcademicOffer`, `CourseSection`, `TeachingAssignment`, `Enrollment`, `CourseEnrollment` y `Homologation` conectan periodo, carrera, plan, nivel, asignatura, docente y estudiante con permisos por rol y auditoria de matriculas/homologaciones.
 
 ---
 
@@ -172,7 +191,7 @@
 - [x] Roles institucionales configurados.
 - [x] Catálogos académicos mínimos funcionales.
 - [x] Personas, estudiantes y docentes gestionables.
-- [ ] Cursos/paralelos y matrículas gestionables.
+- [x] Cursos/paralelos y matrículas gestionables.
 - [ ] Sílabos nueva versión gestionables.
 - [ ] Motor de notas S1/S2/S3 probado.
 - [ ] Registro de notas por docente.

@@ -1,4 +1,7 @@
+from django.urls import path
 from rest_framework.routers import DefaultRouter
+
+from apps.reports.views import AcademicDashboardView
 
 from .views import (
     AcademicDomainViewSet,
@@ -41,4 +44,7 @@ router.register(
     "achievement-levels", AchievementLevelViewSet, basename="achievement-level"
 )
 
-urlpatterns = router.urls
+urlpatterns = [
+    path("dashboard/", AcademicDashboardView.as_view(), name="academic-dashboard"),
+    *router.urls,
+]
