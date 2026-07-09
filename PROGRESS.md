@@ -17,9 +17,9 @@
 ## 📍 Cursor actual
 
 - **Sprint activo:** Sprint 0 — Foundation & Documentation
-- **Ticket activo:** `S0-T7` (aún no iniciado)
-- **Última sesión:** 2026-07-08 — cerrado `S0-T6`
-- **Próximo paso:** Seguridad base, JWT scaffold, CORS y rate limiting. Ver `SPRINTS/sprint-00-foundation.md`, ticket `S0-T7`.
+- **Ticket activo:** `S0-T8` (aún no iniciado)
+- **Última sesión:** 2026-07-08 — cerrado `S0-T7`
+- **Próximo paso:** Bootstrap de apps Django del MVP y healthcheck extendido. Ver `SPRINTS/sprint-00-foundation.md`, ticket `S0-T8`.
 
 ---
 
@@ -67,7 +67,7 @@
 - ✅ S0-T4 — Settings por entornos + variables de entorno
 - ✅ S0-T5 — Calidad de código, testing y pre-commit
 - ✅ S0-T6 — CI/CD con GitHub Actions
-- ⬜ S0-T7 — Seguridad base, JWT scaffold, CORS y rate limiting
+- ✅ S0-T7 — Seguridad base, JWT scaffold, CORS y rate limiting
 - ⬜ S0-T8 — Bootstrap de apps Django del MVP y healthcheck extendido
 
 > Al cambiar de sprint, copia aquí el desglose de tickets del archivo correspondiente en `SPRINTS/`.
@@ -86,6 +86,7 @@
 | 2026-07-08 | S0 | S0-T4 | commit pendiente | busqueda de `SECRET_KEY`; `manage.py check` en local/test/production; `manage.py check --deploy` en Docker | Settings divididos en `base`, `local`, `test`, `production`; HTTPS redirect queda delegado al proxy |
 | 2026-07-08 | S0 | S0-T5 | commit pendiente | `pytest`; `ruff check .`; `black --check .`; `isort --check .`; `pre-commit run --all-files` | Configurados `pyproject.toml`, `.pre-commit-config.yaml` y pruebas core |
 | 2026-07-08 | S0 | S0-T6 | commit pendiente | `manage.py check`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Workflow CI agregado; check verde remoto queda pendiente hasta push a GitHub |
+| 2026-07-08 | S0 | S0-T7 | commit pendiente | `manage.py check --deploy`; `pytest backend/apps/core`; `ruff check`; `black --check`; `curl /api/health/` | JWT, CORS y throttling configurados; healthcheck sigue publico |
 | | | | | | |
 
 ---

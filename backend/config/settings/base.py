@@ -21,7 +21,10 @@ APP_NAME = env("APP_NAME", default="puceasig")
 APP_VERSION = env("APP_VERSION", default="0.1.0")
 APP_ENVIRONMENT = env("APP_ENVIRONMENT", default="local")
 
-SECRET_KEY = env("DJANGO_SECRET_KEY", default="unsafe-local-dev-key-change-me")
+SECRET_KEY = env(
+    "DJANGO_SECRET_KEY",
+    default="local-placeholder-secret-key-change-me-2026-07-puceasigcx",
+)
 DEBUG = env.bool("DJANGO_DEBUG", default=env.bool("DEBUG", default=False))
 ALLOWED_HOSTS = env("DJANGO_ALLOWED_HOSTS")
 
