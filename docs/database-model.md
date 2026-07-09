@@ -56,23 +56,145 @@ Campos sugeridos:
 
 ### AcademicPeriod
 
-Periodo academico con fechas de matricula y calificacion.
+Periodo academico con fechas de matricula.
+
+Campos implementados en Sprint 2:
+
+- `name`
+- `code`, unico
+- `start_date`
+- `end_date`
+- `enrollment_start_date`
+- `enrollment_end_date`
+- `status`: borrador, activo, cerrado, archivado
+- `is_current`
+
+Reglas:
+
+- Solo un periodo puede marcarse como actual.
+- Periodos activos no pueden solaparse en fechas.
+- Las fechas de matricula deben estar dentro del periodo.
 
 ### Career
 
-Carrera institucional. Puede tener coordinador y modalidad.
+Carrera institucional. Se vincula con unidad academica, modalidad, dominio y,
+si aplica, usuario coordinador.
+
+Entidades de soporte implementadas:
+
+- `FacultyOrUnit`
+- `Modality`
+- `AcademicDomain`
+
+Reglas:
+
+- Codigos unicos para unidad, modalidad, dominio y carrera.
 
 ### StudyPlan
 
 Plan o malla academica asociado a una carrera.
 
+Campos implementados:
+
+- `career`
+- `code`
+- `name`
+- `version`
+- `effective_from`
+- `effective_to`
+- `is_current`
+- `status`
+
+Reglas:
+
+- El codigo no se duplica dentro de la misma carrera.
+- Solo un plan puede estar marcado como vigente por carrera.
+
 ### AcademicLevel
 
 Nivel, semestre o ciclo dentro de un plan.
 
+Reglas:
+
+- Un plan puede tener multiples niveles.
+- `number` y `order` no se duplican dentro del mismo plan.
+
 ### Subject
 
 Asignatura asociada a carrera, plan y nivel. Define horas, prerrequisitos, silabo por defecto y sistema de calificacion por defecto.
+
+En Sprint 2 la asignatura se define como catalogo de carrera y se asocia a plan
+y nivel mediante `CurriculumSubject`.
+
+Campos implementados:
+
+- `career`
+- `code`
+- `name`
+- `total_hours`
+- `contact_hours`
+- `autonomous_hours`
+- `practical_hours`
+- `default_syllabus_version`
+- `default_grading_system`
+- `status`
+
+Reglas:
+
+- El codigo de asignatura no se duplica dentro de la misma carrera.
+- La suma de horas contacto, autonomas y practico-experimentales debe coincidir
+  con las horas totales.
+
+### CurriculumSubject
+
+Relaciona una asignatura con un plan y nivel de la malla curricular.
+
+Reglas:
+
+- El nivel debe pertenecer al mismo plan.
+- La asignatura debe pertenecer a la carrera del plan.
+- Una asignatura no se duplica dentro del mismo plan.
+
+### CurriculumPrerequisite
+
+Relacion explicita de prerrequisitos entre asignaturas de malla.
+
+Reglas:
+
+- El prerrequisito debe pertenecer al mismo plan.
+- No se permite una asignatura como prerrequisito de si misma.
+- No se permiten ciclos simples A -> B y B -> A.
+
+### AcademicSetting
+
+Configuracion academica de escala de calificacion por defecto, periodo y/o
+carrera.
+
+Campos implementados:
+
+- `score_min`
+- `score_max`
+- `passing_score`
+- `default_grading_system`
+- `is_default`
+
+Reglas:
+
+- La escala base del MVP es 0 a 50.
+- El umbral de aprobacion base es 30.
+- La configuracion efectiva se consulta por servicio con prioridad
+  periodo+carrera, carrera, periodo y valor global.
+
+### AchievementLevel
+
+Niveles de logro configurables por `AcademicSetting`.
+
+Configuracion base:
+
+- A: 45 a 50.
+- B: 40 a 44.99.
+- C: 30 a 39.99.
+- D: 0 a 29.99.
 
 ### CourseOffering
 

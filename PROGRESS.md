@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 2 — Academic Catalogs & Institutional Setup
-- **Ticket activo:** `S2-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado Sprint 1 completo (`S1-T1` a `S1-T7`)
-- **Próximo paso:** Implementar catálogos académicos base. Ver `SPRINTS/sprint-02-academic-catalogs.md`, ticket `S2-T1`.
+- **Sprint activo:** Sprint 3 — People, Students & Teachers
+- **Ticket activo:** `S3-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado Sprint 2 completo (`S2-T1` a `S2-T7`)
+- **Próximo paso:** Implementar núcleo de personas. Ver `SPRINTS/sprint-03-people-students-teachers.md`, ticket `S3-T1`.
 
 ---
 
@@ -37,8 +37,8 @@
 
 ### Bloque MVP — Gestión Académica
 - ✅ Sprint 1 — Authentication, Roles & Access Control
-- 🟡 **Sprint 2 — Academic Catalogs & Institutional Setup**
-- ⬜ Sprint 3 — People, Students & Teachers
+- ✅ Sprint 2 — Academic Catalogs & Institutional Setup
+- 🟡 **Sprint 3 — People, Students & Teachers**
 - ⬜ Sprint 4 — Academic Offer, Courses & Enrollment
 - ⬜ Sprint 5 — Syllabus Management
 - ⬜ Sprint 6 — Grading Engine S1/S2/S3
@@ -59,6 +59,17 @@
 ---
 
 ## Detalle del sprint activo
+
+### Sprint 2 — Academic Catalogs & Institutional Setup
+- ✅ S2-T1 — Modelos de periodos académicos
+- ✅ S2-T2 — Carreras, modalidades y dominios
+- ✅ S2-T3 — Planes de estudio, niveles y malla
+- ✅ S2-T4 — Asignaturas y prerrequisitos
+- ✅ S2-T5 — Parámetros académicos configurables
+- ✅ S2-T6 — API y Admin de catálogos
+- ✅ S2-T7 — Seeds sintéticos mínimos
+
+> Sprint 2 cerrado el 2026-07-09. El cursor queda en Sprint 3 / S3-T1.
 
 ### Sprint 1 — Authentication, Roles & Access Control
 - ✅ S1-T1 — Custom User institucional
@@ -90,6 +101,13 @@
 | 2026-07-09 | S0.5 | S0.5-T2 | `feat/s0-5-t2-theme-tokens` | navegacion visual en `https://www.puce.edu.ec/`; `npm run lint`; `npm run typecheck`; `npm run build`; verificacion local `http://127.0.0.1:3000` | Tema institucional centralizado en tokens; documentacion inicial en `docs/frontend-design-system.md`; sin logos oficiales ni assets copiados |
 | 2026-07-09 | S0.5 | S0.5-T3 a S0.5-T10 | `feat/s0-5-ux-foundation-complete` | `npm run lint`; `npm run typecheck`; `npm run build` | Componentes UI, layout autenticado, navegacion por rol, auth publica, dashboards, wireframes MVP, constructor de silabos, notas S1/S2/S3 y handoff documentado; `npm install lucide-react` mantiene 2 vulnerabilidades moderadas transitivas |
 | 2026-07-09 | S1 | S1-T1 a S1-T7 | `feat/s1-auth-roles` | `manage.py check`; `manage.py makemigrations accounts audit`; `manage.py migrate`; `createsuperuser --noinput`; `manage.py seed_roles`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Usuario institucional custom, roles Django Groups, JWT login/refresh/logout, password reset, `/api/me/`, permissions DRF y auditoria base implementados; base SQLite previa respaldada como `backend/db.sqlite3.pre-s1-backup-*` por cambio de `AUTH_USER_MODEL` |
+| 2026-07-09 | S2 | S2-T1 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_periods.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Periodos académicos con estados, periodo actual único, validación de solapamiento activo y admin con filtros. |
+| 2026-07-09 | S2 | S2-T2 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_careers.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Unidades académicas, modalidades, dominios y carreras con códigos únicos y permisos de admin por rol. |
+| 2026-07-09 | S2 | S2-T3 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_study_plan.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Planes de estudio, niveles ordenados y plan vigente único por carrera. |
+| 2026-07-09 | S2 | S2-T4 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_subjects.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Asignaturas por carrera, malla curricular y prerrequisitos con rechazo de ciclos simples. |
+| 2026-07-09 | S2 | S2-T5 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_academic_settings.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | Configuración académica 0-50, umbral 30, niveles A/B/C/D y catálogo S1/S2/S3 consultable por servicio. |
+| 2026-07-09 | S2 | S2-T6 | `feat/s2-academic-catalogs` | `pytest backend/apps/academic_catalogs/tests/test_catalog_api.py`; `pytest`; `manage.py check`; `ruff check .`; `black --check .`; `isort --check .` | API `/api/academic/` protegida por roles, admin con filtros/búsqueda y `docs/api.md` creado. |
+| 2026-07-09 | S2 | S2-T7 | `feat/s2-academic-catalogs` | `manage.py seed_academic_catalogs`; `manage.py seed_academic_catalogs`; `pytest backend/apps/academic_catalogs/tests/test_seeds.py`; `pytest`; `manage.py seed_roles` | Seed sintético idempotente para catálogos base; roles sincronizados con permisos Django Admin de catálogos. |
 | | | | | | |
 
 ---
@@ -114,6 +132,7 @@
 - Autorización: roles institucionales + permisos por objeto cuando aplique.
 - Auditoría obligatoria para notas, sílabos, matrículas, roles y cambios críticos.
 - Sistemas de notas del MVP: S1, S2 y S3 como motor de reglas probado, no como fórmulas copiadas de Excel.
+- Catálogos académicos Sprint 2: `AcademicPeriod`, `FacultyOrUnit`, `Modality`, `AcademicDomain`, `Career`, `StudyPlan`, `AcademicLevel`, `Subject`, `CurriculumSubject`, `CurriculumPrerequisite`, `AcademicSetting`, `AchievementLevel` y `GradingSystem`.
 
 ---
 
@@ -134,7 +153,7 @@
 - [x] Frontend Next.js creado y compilando.
 - [x] Design system institucional documentado.
 - [x] Roles institucionales configurados.
-- [ ] Catálogos académicos mínimos funcionales.
+- [x] Catálogos académicos mínimos funcionales.
 - [ ] Personas, estudiantes y docentes gestionables.
 - [ ] Cursos/paralelos y matrículas gestionables.
 - [ ] Sílabos nueva versión gestionables.

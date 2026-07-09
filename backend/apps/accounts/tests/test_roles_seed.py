@@ -29,3 +29,19 @@ def test_seed_roles_assigns_base_permissions_to_administrator():
     assert "accounts.add_user" in permission_labels
     assert "accounts.change_user" in permission_labels
     assert "audit.view_auditlog" in permission_labels
+    assert "academic_catalogs.add_academicperiod" in permission_labels
+    assert "academic_catalogs.change_career" in permission_labels
+
+
+@pytest.mark.django_db
+def test_seed_roles_assigns_catalog_view_permissions_to_coordinator():
+    call_command("seed_roles")
+
+    coordinator = Group.objects.get(name="Coordinador de carrera")
+    permission_labels = {
+        f"{permission.content_type.app_label}.{permission.codename}"
+        for permission in coordinator.permissions.all()
+    }
+
+    assert "academic_catalogs.view_career" in permission_labels
+    assert "academic_catalogs.add_career" not in permission_labels

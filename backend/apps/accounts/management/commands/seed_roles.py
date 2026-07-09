@@ -8,8 +8,34 @@ from apps.accounts.roles import (
     ROLE_SECRETARY,
 )
 
+ACADEMIC_CATALOG_MODELS = {
+    "academicdomain",
+    "academiclevel",
+    "academicperiod",
+    "academicsetting",
+    "achievementlevel",
+    "career",
+    "curriculumprerequisite",
+    "curriculumsubject",
+    "facultyorunit",
+    "gradingsystem",
+    "modality",
+    "studyplan",
+    "subject",
+}
+
+
+def catalog_permissions(*actions):
+    return {
+        f"academic_catalogs.{action}_{model}"
+        for action in actions
+        for model in ACADEMIC_CATALOG_MODELS
+    }
+
+
 PERMISSIONS_BY_ROLE = {
-    ROLE_ADMINISTRATOR: {
+    ROLE_ADMINISTRATOR: catalog_permissions("add", "change", "delete", "view")
+    | {
         "accounts.add_user",
         "accounts.change_user",
         "accounts.delete_user",
@@ -20,7 +46,8 @@ PERMISSIONS_BY_ROLE = {
         "accounts.view_userprofile",
         "audit.view_auditlog",
     },
-    ROLE_SECRETARY: {
+    ROLE_SECRETARY: catalog_permissions("add", "change", "view")
+    | {
         "accounts.add_user",
         "accounts.change_user",
         "accounts.view_user",
@@ -28,7 +55,8 @@ PERMISSIONS_BY_ROLE = {
         "accounts.view_userprofile",
         "audit.view_auditlog",
     },
-    ROLE_CAREER_COORDINATOR: {
+    ROLE_CAREER_COORDINATOR: catalog_permissions("view")
+    | {
         "accounts.view_user",
         "accounts.view_userprofile",
         "audit.view_auditlog",
