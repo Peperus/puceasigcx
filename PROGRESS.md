@@ -17,9 +17,9 @@
 ## 📍 Cursor actual
 
 - **Sprint activo:** Sprint 0.5 — Frontend Design System & UX Foundation
-- **Ticket activo:** `S0.5-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-08 — cerrado `S0-T8` y Sprint 0
-- **Próximo paso:** Crear estructura frontend base. Ver `SPRINTS/sprint-00-5-frontend-design-system.md`, ticket `S0.5-T1`.
+- **Ticket activo:** `S0.5-T2` (aún no iniciado)
+- **Última sesión:** 2026-07-09 — cerrado `S0.5-T1`
+- **Próximo paso:** Definir tema visual institucional y tokens de diseño. Ver `SPRINTS/sprint-00-5-frontend-design-system.md`, ticket `S0.5-T2`.
 
 ---
 
@@ -61,7 +61,7 @@
 ## Detalle del sprint activo
 
 ### Sprint 0.5 — Frontend Design System & UX Foundation
-- ⬜ S0.5-T1 — Crear estructura frontend base
+- ✅ S0.5-T1 — Crear estructura frontend base
 - ⬜ S0.5-T2 — Definir tema visual institucional y tokens de diseño
 - ⬜ S0.5-T3 — Crear componentes UI reutilizables
 - ⬜ S0.5-T4 — Layout institucional autenticado y navegación por rol
@@ -89,6 +89,7 @@
 | 2026-07-08 | S0 | S0-T6 | `943b2f3` | `manage.py check`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Workflow CI agregado; check verde remoto queda pendiente hasta push a GitHub |
 | 2026-07-08 | S0 | S0-T7 | `f0b7029` | `manage.py check --deploy`; `pytest backend/apps/core`; `ruff check`; `black --check`; `curl /api/health/` | JWT, CORS y throttling configurados; healthcheck sigue publico |
 | 2026-07-08 | S0 | S0-T8 | `2b1bf1a` | `pytest`; `manage.py check`; `curl /api/health/`; `curl /api/version/`; `ruff check`; `black --check` | Apps MVP con estructura consistente, routers base y convencion documentada |
+| 2026-07-09 | S0.5 | S0.5-T1 | `feat/s0-5-t1-frontend-base` | `npm install`; `npm run lint`; `npm run typecheck`; `npm run build` | Frontend Next.js + TypeScript + Tailwind creado en `/frontend`; npm audit reporta 2 vulnerabilidades moderadas de dependencias transitivas |
 | | | | | | |
 
 ---
@@ -101,6 +102,7 @@
 - Versiones de servicios locales: PostgreSQL 18 Alpine, Redis 8 Alpine.
 - Frontend del MVP: Next.js + TypeScript + Tailwind CSS.
 - Sprint específico de frontend: Sprint 0.5 — Frontend Design System & UX Foundation, antes de Sprint 1.
+- Gestor de paquetes frontend inicial: npm.
 - Django Admin: herramienta interna auxiliar para administración, soporte y carga inicial; no será el frontend principal del MVP.
 - Componentes UI frontend: shadcn/ui o componentes propios equivalentes, centralizados y reutilizables.
 - Formularios frontend: React Hook Form + Zod cuando existan formularios funcionales.
@@ -116,7 +118,6 @@
 
 ## Decisiones pendientes
 
-- Definir gestor de paquetes frontend: npm, pnpm o yarn.
 - Confirmar si se usará shadcn/ui completo o componentes propios equivalentes.
 - Definir proveedor S3 compatible: Cloudflare R2, AWS S3 o MinIO institucional.
 - Definir estrategia de despliegue piloto: VPS, servidor institucional, Docker Compose o PaaS.
@@ -129,7 +130,7 @@
 
 - [x] Repositorio documentado para Codex.
 - [x] Backend Django ejecutable localmente.
-- [ ] Frontend Next.js creado y compilando.
+- [x] Frontend Next.js creado y compilando.
 - [ ] Design system institucional documentado.
 - [ ] Roles institucionales configurados.
 - [ ] Catálogos académicos mínimos funcionales.
