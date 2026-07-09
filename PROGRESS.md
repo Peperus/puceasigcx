@@ -17,9 +17,9 @@
 ## 📍 Cursor actual
 
 - **Sprint activo:** Sprint 0 — Foundation & Documentation
-- **Ticket activo:** `S0-T4` (aún no iniciado)
-- **Última sesión:** 2026-07-08 — cerrado `S0-T3`
-- **Próximo paso:** Settings por entornos + variables de entorno. Ver `SPRINTS/sprint-00-foundation.md`, ticket `S0-T4`.
+- **Ticket activo:** `S0-T5` (aún no iniciado)
+- **Última sesión:** 2026-07-08 — cerrado `S0-T4`
+- **Próximo paso:** Calidad de código, testing y pre-commit. Ver `SPRINTS/sprint-00-foundation.md`, ticket `S0-T5`.
 
 ---
 
@@ -64,7 +64,7 @@
 - ✅ S0-T1 — Base documental del repositorio para Codex
 - ✅ S0-T2 — Inicializar backend Django + DRF modular
 - ✅ S0-T3 — Docker Compose con PostgreSQL y Redis
-- ⬜ S0-T4 — Settings por entornos + variables de entorno
+- ✅ S0-T4 — Settings por entornos + variables de entorno
 - ⬜ S0-T5 — Calidad de código, testing y pre-commit
 - ⬜ S0-T6 — CI/CD con GitHub Actions
 - ⬜ S0-T7 — Seguridad base, JWT scaffold, CORS y rate limiting
@@ -83,6 +83,7 @@
 | 2026-07-08 | S0 | S0-T1 | sin rama Git local | existencia de archivos; busqueda de secretos con `rg`; revision documental | Repositorio aun no tiene `.git`; cursor movido a S0-T2 |
 | 2026-07-08 | S0 | S0-T2 | commit pendiente | `python manage.py check`; `python manage.py migrate`; `GET /api/health/` local | Backend Django 6.0.7 + DRF 3.17.1 modular creado |
 | 2026-07-08 | S0 | S0-T3 | commit pendiente | `docker compose up -d --build`; `docker compose ps`; `docker compose exec backend python backend/manage.py migrate`; `curl /api/health/` | Puerto 8000 ocupado por otro stack local; verificado en `BACKEND_PORT=8001` |
+| 2026-07-08 | S0 | S0-T4 | commit pendiente | busqueda de `SECRET_KEY`; `manage.py check` en local/test/production; `manage.py check --deploy` en Docker | Settings divididos en `base`, `local`, `test`, `production`; HTTPS redirect queda delegado al proxy |
 | | | | | | |
 
 ---

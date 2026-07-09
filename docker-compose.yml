@@ -36,7 +36,7 @@ services:
       APP_NAME: ${APP_NAME:-puceasig}
       APP_VERSION: ${APP_VERSION:-0.1.0}
       DJANGO_SETTINGS_MODULE: ${DJANGO_SETTINGS_MODULE:-config.settings.production}
-      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-change-me-only-for-local-compose}
+      DJANGO_SECRET_KEY: ${DJANGO_SECRET_KEY:-local-compose-dev-secret-key-change-me-2026-07-puceasigcx}
       DJANGO_ALLOWED_HOSTS: ${DJANGO_ALLOWED_HOSTS:-localhost,127.0.0.1,0.0.0.0,backend}
       DATABASE_URL: ${DATABASE_URL:-postgres://puceasig:puceasig_dev_password@db:5432/puceasig}
       REDIS_URL: ${REDIS_URL:-redis://redis:6379/0}
