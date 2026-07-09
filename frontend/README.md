@@ -24,6 +24,8 @@ npm run build
 `npm run dev` usa Webpack por defecto. Next.js 16.2.10 con Turbopack puede
 disparar un error interno de Next DevTools al navegar rutas anidadas del App
 Router; el build de produccion no presenta ese problema.
+En desarrollo tambien se reemplaza el modulo cliente de Next DevTools por un
+shim no-op para evitar que el Segment Explorer interno capture la pantalla.
 
 ## Estructura principal
 
