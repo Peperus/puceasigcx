@@ -55,6 +55,7 @@ Al inicio del proyecto algunas carpetas todavia no existen; se crean en sus tick
 - `docs/security.md`: roles, permisos, auditoria y proteccion de datos.
 - `docs/frontend-architecture.md`: decision frontend para el MVP.
 - `docs/mvp-roadmap.md`: fases y entregables.
+- `docs/backend-app-conventions.md`: convencion de estructura para apps Django.
 
 ## Comandos previstos
 

@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 0 — Foundation & Documentation
-- **Ticket activo:** `S0-T8` (aún no iniciado)
-- **Última sesión:** 2026-07-08 — cerrado `S0-T7`
-- **Próximo paso:** Bootstrap de apps Django del MVP y healthcheck extendido. Ver `SPRINTS/sprint-00-foundation.md`, ticket `S0-T8`.
+- **Sprint activo:** Sprint 0.5 — Frontend Design System & UX Foundation
+- **Ticket activo:** `S0.5-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-08 — cerrado `S0-T8` y Sprint 0
+- **Próximo paso:** Crear estructura frontend base. Ver `SPRINTS/sprint-00-5-frontend-design-system.md`, ticket `S0.5-T1`.
 
 ---
 
@@ -32,8 +32,8 @@
 ## Tablero de sprints
 
 ### Bloque Foundation
-- 🟡 **Sprint 0 — Foundation & Documentation**
-- ⬜ Sprint 0.5 — Frontend Design System & UX Foundation
+- ✅ Sprint 0 — Foundation & Documentation
+- 🟡 **Sprint 0.5 — Frontend Design System & UX Foundation**
 
 ### Bloque MVP — Gestión Académica
 - ⬜ Sprint 1 — Authentication, Roles & Access Control
@@ -60,18 +60,19 @@
 
 ## Detalle del sprint activo
 
-### Sprint 0 — Foundation & Documentation
-- ✅ S0-T1 — Base documental del repositorio para Codex
-- ✅ S0-T2 — Inicializar backend Django + DRF modular
-- ✅ S0-T3 — Docker Compose con PostgreSQL y Redis
-- ✅ S0-T4 — Settings por entornos + variables de entorno
-- ✅ S0-T5 — Calidad de código, testing y pre-commit
-- ✅ S0-T6 — CI/CD con GitHub Actions
-- ✅ S0-T7 — Seguridad base, JWT scaffold, CORS y rate limiting
-- ⬜ S0-T8 — Bootstrap de apps Django del MVP y healthcheck extendido
+### Sprint 0.5 — Frontend Design System & UX Foundation
+- ⬜ S0.5-T1 — Crear estructura frontend base
+- ⬜ S0.5-T2 — Definir tema visual institucional y tokens de diseño
+- ⬜ S0.5-T3 — Crear componentes UI reutilizables
+- ⬜ S0.5-T4 — Layout institucional autenticado y navegación por rol
+- ⬜ S0.5-T5 — Prototipos de autenticación y páginas públicas
+- ⬜ S0.5-T6 — Dashboards prototipo por rol
+- ⬜ S0.5-T7 — Wireframes navegables de módulos del MVP
+- ⬜ S0.5-T8 — Prototipo específico del constructor de sílabos
+- ⬜ S0.5-T9 — Prototipo específico de gestión de notas S1/S2/S3
+- ⬜ S0.5-T10 — Documentación de diseño y handoff para sprints funcionales
 
-> Al cambiar de sprint, copia aquí el desglose de tickets del archivo correspondiente en `SPRINTS/`.
-> Después de cerrar Sprint 0, el siguiente cursor debe ser **Sprint 0.5 / S0.5-T1** para fijar el frontend antes del Sprint 1.
+> Sprint 0 cerrado el 2026-07-08. El frontend debe fijarse en Sprint 0.5 antes de iniciar Sprint 1.
 
 ---
 
@@ -80,13 +81,14 @@
 | Fecha | Sprint | Tickets cerrados | Rama / PR | Pruebas ejecutadas | Notas / pendientes |
 |---|---|---|---|---|---|
 | _(ejemplo)_ | S0 | S0-T1 | `feat/s0-t1-docs` / #1 | revisión manual docs | Falta definir versión exacta de Django |
-| 2026-07-08 | S0 | S0-T1 | sin rama Git local | existencia de archivos; busqueda de secretos con `rg`; revision documental | Repositorio aun no tiene `.git`; cursor movido a S0-T2 |
-| 2026-07-08 | S0 | S0-T2 | commit pendiente | `python manage.py check`; `python manage.py migrate`; `GET /api/health/` local | Backend Django 6.0.7 + DRF 3.17.1 modular creado |
-| 2026-07-08 | S0 | S0-T3 | commit pendiente | `docker compose up -d --build`; `docker compose ps`; `docker compose exec backend python backend/manage.py migrate`; `curl /api/health/` | Puerto 8000 ocupado por otro stack local; verificado en `BACKEND_PORT=8001` |
-| 2026-07-08 | S0 | S0-T4 | commit pendiente | busqueda de `SECRET_KEY`; `manage.py check` en local/test/production; `manage.py check --deploy` en Docker | Settings divididos en `base`, `local`, `test`, `production`; HTTPS redirect queda delegado al proxy |
-| 2026-07-08 | S0 | S0-T5 | commit pendiente | `pytest`; `ruff check .`; `black --check .`; `isort --check .`; `pre-commit run --all-files` | Configurados `pyproject.toml`, `.pre-commit-config.yaml` y pruebas core |
-| 2026-07-08 | S0 | S0-T6 | commit pendiente | `manage.py check`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Workflow CI agregado; check verde remoto queda pendiente hasta push a GitHub |
-| 2026-07-08 | S0 | S0-T7 | commit pendiente | `manage.py check --deploy`; `pytest backend/apps/core`; `ruff check`; `black --check`; `curl /api/health/` | JWT, CORS y throttling configurados; healthcheck sigue publico |
+| 2026-07-08 | S0 | S0-T1 | `4e839ad` | existencia de archivos; busqueda de secretos con `rg`; revision documental | Commit creado al inicializar Git despues del cierre documental |
+| 2026-07-08 | S0 | S0-T2 | `f08fad9` | `python manage.py check`; `python manage.py migrate`; `GET /api/health/` local | Backend Django 6.0.7 + DRF 3.17.1 modular creado |
+| 2026-07-08 | S0 | S0-T3 | `f27f9ee` | `docker compose up -d --build`; `docker compose ps`; `docker compose exec backend python backend/manage.py migrate`; `curl /api/health/` | Puerto 8000 ocupado por otro stack local; verificado en `BACKEND_PORT=8001` |
+| 2026-07-08 | S0 | S0-T4 | `e7b918b` | busqueda de `SECRET_KEY`; `manage.py check` en local/test/production; `manage.py check --deploy` en Docker | Settings divididos en `base`, `local`, `test`, `production`; HTTPS redirect queda delegado al proxy |
+| 2026-07-08 | S0 | S0-T5 | `113601b` | `pytest`; `ruff check .`; `black --check .`; `isort --check .`; `pre-commit run --all-files` | Configurados `pyproject.toml`, `.pre-commit-config.yaml` y pruebas core |
+| 2026-07-08 | S0 | S0-T6 | `943b2f3` | `manage.py check`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | Workflow CI agregado; check verde remoto queda pendiente hasta push a GitHub |
+| 2026-07-08 | S0 | S0-T7 | `f0b7029` | `manage.py check --deploy`; `pytest backend/apps/core`; `ruff check`; `black --check`; `curl /api/health/` | JWT, CORS y throttling configurados; healthcheck sigue publico |
+| 2026-07-08 | S0 | S0-T8 | commit pendiente | `pytest`; `manage.py check`; `curl /api/health/`; `curl /api/version/`; `ruff check`; `black --check` | Apps MVP con estructura consistente, routers base y convencion documentada |
 | | | | | | |
 
 ---
@@ -94,7 +96,9 @@
 ## Decisiones de arquitectura tomadas
 
 - Backend principal: Django + Django REST Framework.
+- Versiones backend base: Python 3.14, Django 6.0.7, Django REST Framework 3.17.1.
 - Base de datos: PostgreSQL.
+- Versiones de servicios locales: PostgreSQL 18 Alpine, Redis 8 Alpine.
 - Frontend del MVP: Next.js + TypeScript + Tailwind CSS.
 - Sprint específico de frontend: Sprint 0.5 — Frontend Design System & UX Foundation, antes de Sprint 1.
 - Django Admin: herramienta interna auxiliar para administración, soporte y carga inicial; no será el frontend principal del MVP.
@@ -123,8 +127,8 @@
 
 ## Checklist global del MVP
 
-- [ ] Repositorio documentado para Codex.
-- [ ] Backend Django ejecutable localmente.
+- [x] Repositorio documentado para Codex.
+- [x] Backend Django ejecutable localmente.
 - [ ] Frontend Next.js creado y compilando.
 - [ ] Design system institucional documentado.
 - [ ] Roles institucionales configurados.
