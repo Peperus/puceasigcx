@@ -107,6 +107,19 @@ Entregables:
 - Hardening del MVP.
 - Documentacion de despliegue piloto.
 
+### Sprint 8.5: Frontend Integration MVP
+
+Debe ejecutarse antes de Sprint 9.
+
+- Autenticacion real contra API.
+- Sesion y navegacion por rol real.
+- Catalogos, personas, oferta y matricula conectados.
+- Silabos conectados a workflow backend.
+- Notas docente/estudiante conectadas.
+- Reportes y auditoria conectados.
+- Dashboards sin mocks criticos.
+- QA E2E minimo y accesibilidad basica.
+
 ## Posterior al MVP
 
 Los sprints 9 a 17 incorporaran macroprocesos institucionales:
