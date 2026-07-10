@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 8 — Reports, Audit, QA & MVP Release
-- **Ticket activo:** `S8-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-10 — cerrado Sprint 7 completo (`S7-T1` a `S7-T7`)
-- **Próximo paso:** Implementar reportes, auditoría final, QA y cierre MVP. Ver `SPRINTS/sprint-08-reports-audit-release.md`, ticket `S8-T1`.
+- **Sprint activo:** Sprint 9 — Admisiones y captación (pendiente de autorización/desglose)
+- **Ticket activo:** `S9-T0` (preparar archivo específico de Sprint 9 antes de implementar)
+- **Última sesión:** 2026-07-10 — cerrado Sprint 8 completo (`S8-T1` a `S8-T8`) y MVP `v0.1.0-mvp` preparado
+- **Próximo paso:** No iniciar módulos post-MVP sin autorización. Si se autoriza Sprint 9, crear `SPRINTS/sprint-09-admisiones.md` con tickets pequeños, criterios y verificaciones.
 
 ---
 
@@ -43,10 +43,10 @@
 - ✅ Sprint 5 — Syllabus Management
 - ✅ Sprint 6 — Grading Engine S1/S2/S3
 - ✅ **Sprint 7 — Grade Entry, Student Views & Closures**
-- 🟡 Sprint 8 — Reports, Audit, QA & MVP Release  ← **MVP funcional al cerrar este sprint**
+- ✅ **Sprint 8 — Reports, Audit, QA & MVP Release**  ← **MVP funcional cerrado**
 
 ### Bloque Escalamiento ERP/SIG posterior al MVP
-- ⬜ Sprint 9 — Admisiones y captación
+- 🟡 Sprint 9 — Admisiones y captación
 - ⬜ Sprint 10 — Bienestar universitario
 - ⬜ Sprint 11 — Biblioteca y repositorio académico
 - ⬜ Sprint 12 — Requerimientos, PQRSD y mensajería institucional
@@ -59,6 +59,18 @@
 ---
 
 ## Detalle de sprints
+
+### Sprint 8 — Reports, Audit, QA & MVP Release
+- ✅ S8-T1 — Reportes académicos mínimos del MVP
+- ✅ S8-T2 — Auditoría transversal
+- ✅ S8-T3 — Hardening de permisos
+- ✅ S8-T4 — QA de reglas de notas con fixtures representativos
+- ✅ S8-T5 — Documentación de usuario MVP
+- ✅ S8-T6 — Preparación de despliegue piloto
+- ✅ S8-T7 — Smoke tests y UAT checklist
+- ✅ S8-T8 — Cierre formal del MVP
+
+> Sprint 8 cerrado el 2026-07-10. El MVP de Gestión Académica queda preparado como `v0.1.0-mvp`. El cursor queda en Sprint 9 / S9-T0, pendiente de autorización y desglose antes de implementar módulos post-MVP.
 
 ### Sprint 7 — Grade Entry, Student Views & Closures
 - ✅ S7-T1 — API de ingreso de notas para docentes
@@ -200,6 +212,14 @@
 | 2026-07-10 | S7 | S7-T5 | `feat/s7-grade-entry-views-closures` | `pytest apps/reports/tests/test_academic_grade_queries.py`; `pytest backend/apps/reports/tests` | Consulta de notas por periodo, carrera, curso, docente, estudiante, modelo y estado; coordinador limitado a su carrera. |
 | 2026-07-10 | S7 | S7-T6 | `feat/s7-grade-entry-views-closures` | `pytest apps/grading/tests/test_gradebook_closure.py`; `pytest backend/apps/grading/tests` | Cierre estricto con snapshot final, bloqueo de edición y reapertura autorizada con justificación y auditoria. |
 | 2026-07-10 | S7 | S7-T7 | `feat/s7-grade-entry-views-closures` | `pytest apps/reports/tests/test_grade_exports.py`; `ruff check .`; `black --check .`; `isort --check .` | Exportación CSV/XLSX básica de actas con permisos y auditoria de descarga. |
+| 2026-07-10 | S8 | S8-T1 | `feat/s8-reports-audit-release` | `pytest backend/apps/reports/tests/test_mvp_reports.py`; `pytest` | Reportes MVP `/api/reports/mvp/<tipo>/` para estudiantes, docentes, cursos, silabos y notas con filtros periodo/carrera y export CSV/XLSX auditada. |
+| 2026-07-10 | S8 | S8-T2 | `feat/s8-reports-audit-release` | `pytest backend/apps/audit/tests/test_cross_module_audit.py`; `pytest` | Auditoria transversal reforzada para personas, estudiantes, docentes, oferta, cursos, asignaciones, matricula, silabos, notas, cierres y exportaciones; API `/api/audit/logs/` solo lectura con filtros. |
+| 2026-07-10 | S8 | S8-T3 | `feat/s8-reports-audit-release` | `pytest backend/apps/accounts/tests backend/apps/enrollment/tests backend/apps/syllabus/tests backend/apps/grading/tests -k permission`; `pytest` | Pruebas negativas de permisos: estudiantes no ven notas ajenas ni reportes masivos; docentes no editan gradebooks no asignados. |
+| 2026-07-10 | S8 | S8-T4 | `feat/s8-reports-audit-release` | `pytest backend/apps/grading/tests/test_grading_acceptance.py`; `pytest` | Escenarios sinteticos end-to-end S1, S2 y S3 desde registro de notas hasta cierre de acta. |
+| 2026-07-10 | S8 | S8-T5 | `feat/s8-reports-audit-release` | `Get-ChildItem docs/user-guide-*.md`; revision documental | Guias MVP creadas para secretaria, docente, coordinador y estudiante, sin credenciales ni datos reales. |
+| 2026-07-10 | S8 | S8-T6 | `feat/s8-reports-audit-release` | `DJANGO_SETTINGS_MODULE=config.settings.production manage.py check --deploy`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | `docs/deployment.md` creado; static/media configurables por entorno; estrategia S3-compatible y backup/restore documentados. |
+| 2026-07-10 | S8 | S8-T7 | `feat/s8-reports-audit-release` | `pytest tests/smoke/`; `npm run lint`; `npm run typecheck`; `npm run build` | Smoke tests basicos, checklist UAT completo y frontend verificado sin cambios funcionales. |
+| 2026-07-10 | S8 | S8-T8 | `feat/s8-reports-audit-release` | `pytest`; `ruff check .`; `black --check .`; `isort --check .` | README y release notes actualizados; limitaciones y backlog post-MVP conectados con sprints 9-17; tag sugerido `v0.1.0-mvp`. |
 | | | | | | |
 
 ---
@@ -258,5 +278,5 @@
 - [x] Registro de notas por docente.
 - [x] Consulta de notas por estudiante.
 - [x] Reportes básicos de secretaría/coordinación.
-- [ ] Auditoría de acciones críticas.
-- [ ] MVP desplegable y documentado.
+- [x] Auditoría de acciones críticas.
+- [x] MVP desplegable y documentado.

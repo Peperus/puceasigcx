@@ -62,6 +62,7 @@ class AcademicOfferSerializer(ServiceModelSerializer):
     level_name = serializers.CharField(source="level.name", read_only=True)
 
     save_service = staticmethod(save_academic_offer)
+    audited = True
 
     class Meta:
         model = AcademicOffer
@@ -97,6 +98,7 @@ class CourseSectionSerializer(ServiceModelSerializer):
     available_seats = serializers.IntegerField(read_only=True)
 
     save_service = staticmethod(save_course_section)
+    audited = True
 
     class Meta:
         model = CourseSection
@@ -132,6 +134,7 @@ class TeachingAssignmentSerializer(ServiceModelSerializer):
     teacher_code = serializers.CharField(source="teacher.teacher_code", read_only=True)
 
     save_service = staticmethod(save_teaching_assignment)
+    audited = True
 
     class Meta:
         model = TeachingAssignment

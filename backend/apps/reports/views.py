@@ -27,7 +27,13 @@ from apps.grading.selectors import (
 )
 from apps.grading.serializers import GradeCalculationSnapshotSerializer
 
-from .services import grade_export_response
+from .selectors import (
+    MVP_REPORT_DEFINITIONS,
+    mvp_report_payload,
+    resolve_report_filters,
+    user_can_view_mvp_reports,
+)
+from .services import grade_export_response, tabular_export_response
 
 
 class CanViewAcademicDashboard(BasePermission):
@@ -40,6 +46,14 @@ class CanViewAcademicDashboard(BasePermission):
                 ROLE_SECRETARY,
                 ROLE_CAREER_COORDINATOR,
             )
+        )
+
+
+class CanViewMvpReports(BasePermission):
+    def has_permission(self, request, view):
+        return bool(
+            getattr(request.user, "is_authenticated", False)
+            and user_can_view_mvp_reports(request.user)
         )
 
 
@@ -102,6 +116,57 @@ class AcademicDashboardView(APIView):
         if latest_period:
             return latest_period
         raise Http404("No existen periodos academicos.")
+
+
+class MvpReportView(APIView):
+    permission_classes = [CanViewMvpReports]
+
+    def get(self, request, report_type):
+        definition = MVP_REPORT_DEFINITIONS.get(report_type)
+        if definition is None:
+            return Response(
+                {
+                    "report_type": (
+                        "Reporte no soportado. Use students, teachers, courses, "
+                        "syllabi o grades."
+                    )
+                },
+                status=404,
+            )
+        filters = resolve_report_filters(request.query_params)
+        for optional_filter in ("status", "grading_model"):
+            if request.query_params.get(optional_filter):
+                filters[optional_filter] = request.query_params[optional_filter]
+        data, rows = mvp_report_payload(
+            report_type=report_type,
+            user=request.user,
+            filters=filters,
+        )
+        export_format = request.query_params.get("file_format")
+        if export_format:
+            export_format = export_format.lower()
+            if export_format not in {"csv", "xlsx"}:
+                return Response(
+                    {"file_format": "Formato no soportado. Use csv o xlsx."},
+                    status=400,
+                )
+            return tabular_export_response(
+                title=definition["title"],
+                headers=definition["headers"],
+                rows=rows,
+                export_format=export_format,
+                user=request.user,
+                filters=filters,
+                request=request,
+            )
+        return Response(
+            {
+                "report_type": report_type,
+                "filters": filters,
+                "count": len(data),
+                "results": data,
+            }
+        )
 
 
 class CanViewGradeReports(BasePermission):

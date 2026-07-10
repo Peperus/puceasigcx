@@ -25,6 +25,47 @@ GRADE_EXPORT_HEADERS = [
 ]
 
 
+def tabular_export_response(
+    *,
+    title,
+    headers,
+    rows,
+    export_format,
+    user,
+    filters,
+    request=None,
+):
+    generated_at = datetime.now(UTC).isoformat()
+    filename = f"{title}-{generated_at[:10]}".replace("_", "-")
+
+    log_event(
+        action="mvp_report_exported",
+        module="reports",
+        user=user,
+        model_name="MvpReport",
+        object_id=title,
+        new_data={"filters": filters, "format": export_format, "rows": len(rows)},
+        request=request,
+    )
+
+    sheet_rows = [["Generado", generated_at], ["Reporte", title], [], headers, *rows]
+    if export_format == "xlsx":
+        response = HttpResponse(
+            _xlsx_bytes_with_rows(sheet_rows),
+            content_type=(
+                "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+            ),
+        )
+        response["Content-Disposition"] = f'attachment; filename="{filename}.xlsx"'
+        return response
+
+    response = HttpResponse(content_type="text/csv; charset=utf-8")
+    response["Content-Disposition"] = f'attachment; filename="{filename}.csv"'
+    writer = csv.writer(response)
+    writer.writerows(sheet_rows)
+    return response
+
+
 def grade_snapshot_export_rows(snapshots):
     rows = []
     for snapshot in snapshots:
@@ -84,8 +125,12 @@ def grade_export_response(*, snapshots, export_format, user, filters, request=No
 
 
 def _xlsx_bytes(rows, generated_at):
-    workbook = BytesIO()
     sheet_rows = [["Generado", generated_at], [], GRADE_EXPORT_HEADERS, *rows]
+    return _xlsx_bytes_with_rows(sheet_rows)
+
+
+def _xlsx_bytes_with_rows(sheet_rows):
+    workbook = BytesIO()
     with zipfile.ZipFile(workbook, "w", compression=zipfile.ZIP_DEFLATED) as archive:
         archive.writestr("[Content_Types].xml", _content_types_xml())
         archive.writestr("_rels/.rels", _root_rels_xml())

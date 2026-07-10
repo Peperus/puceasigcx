@@ -21,19 +21,116 @@ def _save_instance(instance):
     return instance
 
 
-@transaction.atomic
-def save_academic_offer(instance):
-    return _save_instance(instance)
+def _offer_snapshot(offer):
+    return {
+        "id": offer.pk,
+        "period_id": offer.period_id,
+        "career_id": offer.career_id,
+        "study_plan_id": offer.study_plan_id,
+        "level_id": offer.level_id,
+        "status": offer.status,
+    }
+
+
+def _course_section_snapshot(course_section):
+    return {
+        "id": course_section.pk,
+        "offer_id": course_section.offer_id,
+        "subject_id": course_section.subject_id,
+        "parallel": course_section.parallel,
+        "capacity": course_section.capacity,
+        "status": course_section.status,
+        "grading_system_id": course_section.grading_system_id,
+    }
+
+
+def _teaching_assignment_snapshot(assignment):
+    return {
+        "id": assignment.pk,
+        "course_section_id": assignment.course_section_id,
+        "teacher_id": assignment.teacher_id,
+        "role": assignment.role,
+        "status": assignment.status,
+        "weekly_hours": (
+            str(assignment.weekly_hours)
+            if assignment.weekly_hours is not None
+            else None
+        ),
+    }
 
 
 @transaction.atomic
-def save_course_section(instance):
-    return _save_instance(instance)
+def save_academic_offer(instance, *, user=None, request=None):
+    created = instance.pk is None
+    previous = (
+        {}
+        if created
+        else _offer_snapshot(
+            AcademicOffer.objects.select_for_update().get(pk=instance.pk)
+        )
+    )
+    offer = _save_instance(instance)
+    log_event(
+        action="academic_offer_created" if created else "academic_offer_updated",
+        module="enrollment",
+        user=user,
+        model_name=AcademicOffer.__name__,
+        object_id=offer.pk,
+        previous_data=previous,
+        new_data=_offer_snapshot(offer),
+        request=request,
+    )
+    return offer
 
 
 @transaction.atomic
-def save_teaching_assignment(instance):
-    return _save_instance(instance)
+def save_course_section(instance, *, user=None, request=None):
+    created = instance.pk is None
+    previous = (
+        {}
+        if created
+        else _course_section_snapshot(
+            CourseSection.objects.select_for_update().get(pk=instance.pk)
+        )
+    )
+    course_section = _save_instance(instance)
+    log_event(
+        action="course_section_created" if created else "course_section_updated",
+        module="enrollment",
+        user=user,
+        model_name=CourseSection.__name__,
+        object_id=course_section.pk,
+        previous_data=previous,
+        new_data=_course_section_snapshot(course_section),
+        request=request,
+    )
+    return course_section
+
+
+@transaction.atomic
+def save_teaching_assignment(instance, *, user=None, request=None):
+    created = instance.pk is None
+    previous = (
+        {}
+        if created
+        else _teaching_assignment_snapshot(
+            TeachingAssignment.objects.select_for_update().get(pk=instance.pk)
+        )
+    )
+    assignment = _save_instance(instance)
+    log_event(
+        action=(
+            "teaching_assignment_created" if created else "teaching_assignment_updated"
+        ),
+        module="enrollment",
+        user=user,
+        model_name=TeachingAssignment.__name__,
+        object_id=assignment.pk,
+        previous_data=previous,
+        new_data=_teaching_assignment_snapshot(assignment),
+        request=request,
+    )
+    return assignment
 
 
 @transaction.atomic

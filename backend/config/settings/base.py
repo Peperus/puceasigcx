@@ -120,10 +120,10 @@ TIME_ZONE = "America/Guayaquil"
 USE_I18N = True
 USE_TZ = True
 
-STATIC_URL = "static/"
-STATIC_ROOT = BASE_DIR / "staticfiles"
-MEDIA_URL = "media/"
-MEDIA_ROOT = BASE_DIR / "media"
+STATIC_URL = env("STATIC_URL", default="static/")
+STATIC_ROOT = Path(env("STATIC_ROOT", default=str(BASE_DIR / "staticfiles")))
+MEDIA_URL = env("MEDIA_URL", default="media/")
+MEDIA_ROOT = Path(env("MEDIA_ROOT", default=str(BASE_DIR / "media")))
 SYLLABUS_SIGNED_FILE_MAX_BYTES = env.int(
     "SYLLABUS_SIGNED_FILE_MAX_BYTES",
     default=5 * 1024 * 1024,
