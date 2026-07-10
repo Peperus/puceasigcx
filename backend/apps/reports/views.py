@@ -20,6 +20,14 @@ from apps.enrollment.models import (
     TeachingAssignment,
     TeachingAssignmentStatus,
 )
+from apps.grading.models import GradeCalculationSnapshot
+from apps.grading.selectors import (
+    user_can_export_grade_reports,
+    visible_gradebooks_for_reports,
+)
+from apps.grading.serializers import GradeCalculationSnapshotSerializer
+
+from .services import grade_export_response
 
 
 class CanViewAcademicDashboard(BasePermission):
@@ -94,3 +102,94 @@ class AcademicDashboardView(APIView):
         if latest_period:
             return latest_period
         raise Http404("No existen periodos academicos.")
+
+
+class CanViewGradeReports(BasePermission):
+    def has_permission(self, request, view):
+        return bool(
+            getattr(request.user, "is_authenticated", False)
+            and user_can_export_grade_reports(request.user)
+        )
+
+
+class AcademicGradeQueryView(APIView):
+    permission_classes = [CanViewGradeReports]
+
+    def get(self, request):
+        snapshots = self._queryset(request)
+        serializer = GradeCalculationSnapshotSerializer(snapshots, many=True)
+        return Response(serializer.data)
+
+    def _queryset(self, request):
+        gradebooks = visible_gradebooks_for_reports(request.user)
+        snapshots = GradeCalculationSnapshot.objects.filter(
+            is_current=True,
+            gradebook__in=gradebooks,
+        ).select_related(
+            "gradebook",
+            "gradebook__course_section",
+            "gradebook__course_section__subject",
+            "gradebook__course_section__offer",
+            "gradebook__course_section__offer__period",
+            "gradebook__course_section__offer__career",
+            "course_enrollment",
+            "course_enrollment__enrollment",
+            "course_enrollment__enrollment__student",
+            "course_enrollment__enrollment__student__person",
+        )
+        filters = request.query_params
+        if filters.get("period"):
+            snapshots = snapshots.filter(
+                gradebook__course_section__offer__period__code=filters["period"]
+            )
+        if filters.get("career"):
+            snapshots = snapshots.filter(
+                gradebook__course_section__offer__career_id=filters["career"]
+            )
+        if filters.get("course"):
+            snapshots = snapshots.filter(gradebook__course_section_id=filters["course"])
+        if filters.get("gradebook"):
+            snapshots = snapshots.filter(gradebook_id=filters["gradebook"])
+        if filters.get("teacher"):
+            snapshots = snapshots.filter(
+                gradebook__course_section__teaching_assignments__teacher_id=filters[
+                    "teacher"
+                ],
+                gradebook__course_section__teaching_assignments__status=(
+                    TeachingAssignmentStatus.ACTIVE
+                ),
+            )
+        if filters.get("student"):
+            snapshots = snapshots.filter(
+                course_enrollment__enrollment__student_id=filters["student"]
+            )
+        if filters.get("grading_model"):
+            snapshots = snapshots.filter(grading_model=filters["grading_model"])
+        status = filters.get("status") or filters.get("result")
+        if status:
+            snapshots = snapshots.filter(final_status=status)
+        return snapshots.distinct().order_by(
+            "gradebook__course_section__subject__code",
+            "course_enrollment__enrollment__student__student_code",
+        )
+
+
+class GradeExportView(AcademicGradeQueryView):
+    def get(self, request):
+        export_format = request.query_params.get(
+            "file_format",
+            request.query_params.get("format", "csv"),
+        ).lower()
+        if export_format not in {"csv", "xlsx"}:
+            return Response(
+                {"format": "Formato no soportado. Use csv o xlsx."},
+                status=400,
+            )
+        snapshots = list(self._queryset(request))
+        return grade_export_response(
+            snapshots=snapshots,
+            export_format=export_format,
+            user=request.user,
+            filters=dict(request.query_params),
+            request=request,
+        )

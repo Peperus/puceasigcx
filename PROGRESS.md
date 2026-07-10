@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 7 — Grade Entry, Student Views & Closures
-- **Ticket activo:** `S7-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-09 — cerrado Sprint 6 completo (`S6-T1` a `S6-T8`)
-- **Próximo paso:** Implementar flujos de ingreso y consulta de notas. Ver `SPRINTS/sprint-07-grades-ui-workflows.md`, ticket `S7-T1`.
+- **Sprint activo:** Sprint 8 — Reports, Audit, QA & MVP Release
+- **Ticket activo:** `S8-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-10 — cerrado Sprint 7 completo (`S7-T1` a `S7-T7`)
+- **Próximo paso:** Implementar reportes, auditoría final, QA y cierre MVP. Ver `SPRINTS/sprint-08-reports-audit-release.md`, ticket `S8-T1`.
 
 ---
 
@@ -42,8 +42,8 @@
 - ✅ Sprint 4 — Academic Offer, Courses & Enrollment
 - ✅ Sprint 5 — Syllabus Management
 - ✅ Sprint 6 — Grading Engine S1/S2/S3
-- 🟡 **Sprint 7 — Grade Entry, Student Views & Closures**
-- ⬜ Sprint 8 — Reports, Audit, QA & MVP Release  ← **MVP funcional al cerrar este sprint**
+- ✅ **Sprint 7 — Grade Entry, Student Views & Closures**
+- 🟡 Sprint 8 — Reports, Audit, QA & MVP Release  ← **MVP funcional al cerrar este sprint**
 
 ### Bloque Escalamiento ERP/SIG posterior al MVP
 - ⬜ Sprint 9 — Admisiones y captación
@@ -59,6 +59,17 @@
 ---
 
 ## Detalle de sprints
+
+### Sprint 7 — Grade Entry, Student Views & Closures
+- ✅ S7-T1 — API de ingreso de notas para docentes
+- ✅ S7-T2 — Flujo S1/S2: calificar por RA y criterio
+- ✅ S7-T3 — Flujo S3: práctica + evaluación por parcial
+- ✅ S7-T4 — Consulta de notas para estudiantes
+- ✅ S7-T5 — Vistas de secretaría y coordinación
+- ✅ S7-T6 — Cierre y reapertura de actas/gradebook
+- ✅ S7-T7 — Exportación básica de actas
+
+> Sprint 7 cerrado el 2026-07-10. El cursor queda en Sprint 8 / S8-T1.
 
 ### Sprint 6 — Grading Engine S1/S2/S3
 - ✅ S6-T1 — Modelos base de libro de calificaciones
@@ -182,6 +193,13 @@
 | 2026-07-09 | S6 | S6-T6 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_grade_snapshots.py` | `GradeCalculationSnapshot` guarda resultado, regla, fuente, usuario y conserva historial al recalcular. |
 | 2026-07-09 | S6 | S6-T7 | `feat/s6-grading-engine` | `pytest backend/apps/grading/tests/test_grade_audit.py` | Auditoria de creacion, modificacion, eliminacion logica y reapertura; bloqueo de libros cerrados. |
 | 2026-07-09 | S6 | S6-T8 | `feat/s6-grading-engine` | `Select-String "S1|S2|S3|pendiente" docs/grading-rules.md docs/grading-engine.md` | Documentados modelos, servicios, casos borde y pendientes institucionales del motor. |
+| 2026-07-10 | S7 | S7-T1 | `feat/s7-grade-entry-views-closures` | `pytest apps/grading/tests/test_teacher_grade_entry_api.py`; `manage.py check`; `pytest` | API docente para cursos asignados, estudiantes y guardado individual de notas con auditoria y recálculo tolerante a incompletos. |
+| 2026-07-10 | S7 | S7-T2 | `feat/s7-grade-entry-views-closures` | `pytest apps/grading/tests/test_ra_criterion_entry.py`; `pytest backend/apps/grading/tests` | Carga masiva S1/S2 por RA/criterio, transaccional y con resumen de letras A/B/C/D desde snapshots. |
+| 2026-07-10 | S7 | S7-T3 | `feat/s7-grade-entry-views-closures` | `pytest apps/grading/tests/test_s3_grade_entry.py`; `pytest backend/apps/grading/tests` | Carga S3 por parcial con práctica/evaluación y cuarta evaluación cuando aplica. |
+| 2026-07-10 | S7 | S7-T4 | `feat/s7-grade-entry-views-closures` | `pytest apps/grading/tests/test_student_grade_view.py`; `pytest backend/apps/grading/tests` | Endpoint `GET /api/student/grades/` limitado al estudiante autenticado y a libros visibles. |
+| 2026-07-10 | S7 | S7-T5 | `feat/s7-grade-entry-views-closures` | `pytest apps/reports/tests/test_academic_grade_queries.py`; `pytest backend/apps/reports/tests` | Consulta de notas por periodo, carrera, curso, docente, estudiante, modelo y estado; coordinador limitado a su carrera. |
+| 2026-07-10 | S7 | S7-T6 | `feat/s7-grade-entry-views-closures` | `pytest apps/grading/tests/test_gradebook_closure.py`; `pytest backend/apps/grading/tests` | Cierre estricto con snapshot final, bloqueo de edición y reapertura autorizada con justificación y auditoria. |
+| 2026-07-10 | S7 | S7-T7 | `feat/s7-grade-entry-views-closures` | `pytest apps/reports/tests/test_grade_exports.py`; `ruff check .`; `black --check .`; `isort --check .` | Exportación CSV/XLSX básica de actas con permisos y auditoria de descarga. |
 | | | | | | |
 
 ---
@@ -211,6 +229,7 @@
 - Oferta y matricula Sprint 4: `AcademicOffer`, `CourseSection`, `TeachingAssignment`, `Enrollment`, `CourseEnrollment` y `Homologation` conectan periodo, carrera, plan, nivel, asignatura, docente y estudiante con permisos por rol y auditoria de matriculas/homologaciones.
 - Silabos Sprint 5: `Syllabus`, competencias, RA, criterios, niveles A/B/C/D, bibliografia, planificacion semanal y PDF firmado quedan asociados a `CourseSection`; el silabo aprobado habilita el contrato de bloqueo para notas en Sprint 6.
 - Motor de notas Sprint 6: `Gradebook`, `GradeItem`, `StudentGradeRecord` y `GradeCalculationSnapshot` implementan S1/S2/S3 como servicios de dominio probados, con snapshots reproducibles, auditoria de cambios y bloqueo de libros cerrados.
+- Flujos de notas Sprint 7: docentes registran notas por curso asignado, S1/S2 por RA/criterio, S3 por parcial, estudiantes consultan solo sus notas, secretaría/coordinación consulta snapshots filtrados y las actas se cierran/reabren con auditoria.
 
 ---
 
@@ -236,8 +255,8 @@
 - [x] Cursos/paralelos y matrículas gestionables.
 - [x] Sílabos nueva versión gestionables.
 - [x] Motor de notas S1/S2/S3 probado.
-- [ ] Registro de notas por docente.
-- [ ] Consulta de notas por estudiante.
-- [ ] Reportes básicos de secretaría/coordinación.
+- [x] Registro de notas por docente.
+- [x] Consulta de notas por estudiante.
+- [x] Reportes básicos de secretaría/coordinación.
 - [ ] Auditoría de acciones críticas.
 - [ ] MVP desplegable y documentado.
