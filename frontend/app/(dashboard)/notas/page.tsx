@@ -1,5 +1,5 @@
-import { GradesPrototype } from "@/components/prototypes/grades-prototype";
+import { GradesWorkspace } from "@/components/data/grades-workspace";
 
 export default function GradesPage() {
-  return <GradesPrototype />;
+  return <GradesWorkspace />;
 }

@@ -1,5 +1,5 @@
-import { DashboardPage } from "@/components/prototypes/dashboard-page";
+import { AcademicDashboard } from "@/components/data/academic-dashboard";
 
 export default function SecretaryDashboardPage() {
-  return <DashboardPage role="secretary" />;
+  return <AcademicDashboard />;
 }

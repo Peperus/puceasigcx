@@ -9,16 +9,19 @@ export const frontendModules = [
 ] as const;
 
 export const mockUserByRole: Record<RoleCode, { name: string; context: string }> = {
-  admin: { name: "Alex Rivera", context: "Administracion general" },
+  administrator: { name: "Alex Rivera", context: "Administracion general" },
   secretary: { name: "Mara Torres", context: "Secretaria academica" },
-  coordinator: { name: "Nora Celi", context: "Coordinacion de carrera" },
+  career_coordinator: { name: "Nora Celi", context: "Coordinacion de carrera" },
   teacher: { name: "Tomas Lema", context: "Docencia" },
   student: { name: "Sofia Paredes", context: "Estudiante" },
+  academic_director: { name: "Daniel Costa", context: "Direccion academica" },
   wellbeing: { name: "Elena Mora", context: "Apoyo institucional" },
+  librarian: { name: "Lina Vega", context: "Biblioteca" },
+  guest: { name: "Invitado demo", context: "Consulta" },
 };
 
 export const dashboardMetrics: Record<RoleCode, DashboardMetric[]> = {
-  admin: [
+  administrator: [
     { label: "Periodo activo", value: "2026-A", detail: "Calendario academico configurado", status: "approved" },
     { label: "Carreras activas", value: "6", detail: "Catalogos listos para oferta", status: "approved" },
     { label: "Usuarios pendientes", value: "12", detail: "Requieren revision de rol", status: "recovery" },
@@ -30,7 +33,7 @@ export const dashboardMetrics: Record<RoleCode, DashboardMetric[]> = {
     { label: "Actas pendientes", value: "9", detail: "Por validacion administrativa", status: "recovery" },
     { label: "Reportes listos", value: "5", detail: "Exportables futuros", status: "ungraded" },
   ],
-  coordinator: [
+  career_coordinator: [
     { label: "Silabos en revision", value: "11", detail: "Esperan observacion o aprobacion", status: "recovery" },
     { label: "Docentes asignados", value: "27", detail: "Periodo 2026-A", status: "approved" },
     { label: "RA en riesgo", value: "7", detail: "Alertas de seguimiento academico", status: "risk" },
@@ -53,6 +56,24 @@ export const dashboardMetrics: Record<RoleCode, DashboardMetric[]> = {
     { label: "Seguimientos abiertos", value: "7", detail: "Prototipo de apoyo institucional", status: "ungraded" },
     { label: "Reportes permitidos", value: "3", detail: "Sin datos sensibles reales", status: "approved" },
     { label: "Casos cerrados", value: "22", detail: "Historico sintetico", status: "approved" },
+  ],
+  academic_director: [
+    { label: "Silabos por aprobar", value: "6", detail: "Revision academica", status: "recovery" },
+    { label: "Cursos activos", value: "42", detail: "Periodo 2026-A", status: "approved" },
+    { label: "Actas cerradas", value: "18", detail: "Seguimiento institucional", status: "approved" },
+    { label: "Alertas", value: "3", detail: "Requieren atencion", status: "risk" },
+  ],
+  librarian: [
+    { label: "Consultas", value: "0", detail: "Modulo posterior al MVP", status: "ungraded" },
+    { label: "Bibliografia", value: "0", detail: "Solo referencias en silabos", status: "ungraded" },
+    { label: "Prestamos", value: "0", detail: "No implementado", status: "ungraded" },
+    { label: "Alertas", value: "0", detail: "Sin fuente real", status: "ungraded" },
+  ],
+  guest: [
+    { label: "Acceso", value: "Limitado", detail: "Consulta restringida", status: "ungraded" },
+    { label: "Datos", value: "0", detail: "Sin permisos", status: "ungraded" },
+    { label: "Reportes", value: "0", detail: "No disponible", status: "ungraded" },
+    { label: "Acciones", value: "0", detail: "Solo lectura", status: "ungraded" },
   ],
 };
 

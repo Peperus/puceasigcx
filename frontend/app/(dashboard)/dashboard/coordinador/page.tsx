@@ -1,5 +1,5 @@
-import { DashboardPage } from "@/components/prototypes/dashboard-page";
+import { AcademicDashboard } from "@/components/data/academic-dashboard";
 
 export default function CoordinatorDashboardPage() {
-  return <DashboardPage role="coordinator" />;
+  return <AcademicDashboard />;
 }

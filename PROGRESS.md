@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 8.5 — Frontend Integration MVP
-- **Ticket activo:** `S8.5-T1` (aún no iniciado)
-- **Última sesión:** 2026-07-10 — creado plan de Sprint 8.5 para convertir el frontend del MVP en UI funcional conectada a APIs reales
-- **Próximo paso:** Implementar autenticación real del frontend. Ver `SPRINTS/sprint-08-5-frontend-integration-mvp.md`, ticket `S8.5-T1`.
+- **Sprint activo:** Sprint 9 — Admisiones y captación
+- **Ticket activo:** `S9-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-10 — Sprint 8.5 cerrado: frontend MVP conectado a APIs reales, QA E2E y documentación actualizada
+- **Próximo paso:** Iniciar Sprint 9 solo con autorización explicita. Ver `SPRINTS/sprint-09-17-escala-epr.md`.
 
 ---
 
@@ -44,10 +44,10 @@
 - ✅ Sprint 6 — Grading Engine S1/S2/S3
 - ✅ **Sprint 7 — Grade Entry, Student Views & Closures**
 - ✅ **Sprint 8 — Reports, Audit, QA & MVP Release**  ← **MVP funcional cerrado**
-- 🟡 Sprint 8.5 — Frontend Integration MVP  ← **UI funcional antes del bloque post-MVP**
+- ✅ Sprint 8.5 — Frontend Integration MVP  ← **UI funcional cerrada**
 
 ### Bloque Escalamiento ERP/SIG posterior al MVP
-- ⬜ Sprint 9 — Admisiones y captación
+- 🟡 Sprint 9 — Admisiones y captación
 - ⬜ Sprint 10 — Bienestar universitario
 - ⬜ Sprint 11 — Biblioteca y repositorio académico
 - ⬜ Sprint 12 — Requerimientos, PQRSD y mensajería institucional
@@ -62,20 +62,21 @@
 ## Detalle de sprints
 
 ### Sprint 8.5 — Frontend Integration MVP
-- 🟡 S8.5-T1 — Cliente API, sesión y autenticación real
-- ⬜ S8.5-T2 — Navegación por rol y shell autenticado funcional
-- ⬜ S8.5-T3 — Catálogos académicos funcionales
-- ⬜ S8.5-T4 — Personas, estudiantes y docentes funcionales
-- ⬜ S8.5-T5 — Oferta académica, asignación docente y matrícula funcionales
-- ⬜ S8.5-T6 — Constructor de sílabos conectado a API
-- ⬜ S8.5-T7 — Carga docente de notas S1/S2/S3 funcional
-- ⬜ S8.5-T8 — Consulta estudiantil de notas funcional
-- ⬜ S8.5-T9 — Reportes y auditoría funcionales
-- ⬜ S8.5-T10 — Dashboards funcionales por rol
-- ⬜ S8.5-T11 — QA E2E y accesibilidad básica
-- ⬜ S8.5-T12 — Documentación y cierre UI MVP
+- ✅ S8.5-T1 — Cliente API, sesión y autenticación real
+- ✅ S8.5-T2 — Navegación por rol y shell autenticado funcional
+- ✅ S8.5-T3 — Catálogos académicos funcionales
+- ✅ S8.5-T4 — Personas, estudiantes y docentes funcionales
+- ✅ S8.5-T5 — Oferta académica, asignación docente y matrícula funcionales
+- ✅ S8.5-T6 — Constructor de sílabos conectado a API
+- ✅ S8.5-T7 — Carga docente de notas S1/S2/S3 funcional
+- ✅ S8.5-T8 — Consulta estudiantil de notas funcional
+- ✅ S8.5-T9 — Reportes y auditoría funcionales
+- ✅ S8.5-T10 — Dashboards funcionales por rol
+- ✅ S8.5-T11 — QA E2E y accesibilidad básica
+- ✅ S8.5-T12 — Documentación y cierre UI MVP
 
 > Sprint 8.5 creado el 2026-07-10. Este sprint no agrega módulos post-MVP; integra el frontend existente con APIs reales del MVP antes de iniciar Sprint 9.
+> Sprint 8.5 cerrado el 2026-07-10. El cursor queda en Sprint 9 / S9-T1, pendiente de autorización para iniciar el bloque post-MVP.
 
 ### Sprint 8 — Reports, Audit, QA & MVP Release
 - ✅ S8-T1 — Reportes académicos mínimos del MVP
@@ -237,7 +238,18 @@
 | 2026-07-10 | S8 | S8-T6 | `feat/s8-reports-audit-release` | `DJANGO_SETTINGS_MODULE=config.settings.production manage.py check --deploy`; `pytest`; `ruff check .`; `black --check .`; `isort --check .` | `docs/deployment.md` creado; static/media configurables por entorno; estrategia S3-compatible y backup/restore documentados. |
 | 2026-07-10 | S8 | S8-T7 | `feat/s8-reports-audit-release` | `pytest tests/smoke/`; `npm run lint`; `npm run typecheck`; `npm run build` | Smoke tests basicos, checklist UAT completo y frontend verificado sin cambios funcionales. |
 | 2026-07-10 | S8 | S8-T8 | `feat/s8-reports-audit-release` | `pytest`; `ruff check .`; `black --check .`; `isort --check .` | README y release notes actualizados; limitaciones y backlog post-MVP conectados con sprints 9-17; tag sugerido `v0.1.0-mvp`. |
-| | | | | | |
+| 2026-07-10 | S8.5 | S8.5-T1 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Cliente API JWT, refresh/logout, `/api/me/`, persistencia local de sesion y rutas protegidas conectadas. |
+| 2026-07-10 | S8.5 | S8.5-T2 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Shell autenticado consume sesion real, filtra navegacion por roles backend y elimina selector mock visible. |
+| 2026-07-10 | S8.5 | S8.5-T3 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Periodos, carreras, asignaturas y cursos/paralelos conectados a APIs reales con busqueda, estados y formularios MVP. |
+| 2026-07-10 | S8.5 | S8.5-T4 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Personas, estudiantes y docentes conectados a APIs reales con formularios y manejo de errores de backend. |
+| 2026-07-10 | S8.5 | S8.5-T5 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Oferta, cursos, asignaciones docentes, matriculas e inscripciones en curso conectadas a endpoints de enrollment. |
+| 2026-07-10 | S8.5 | S8.5-T6 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Workspace de silabos conectado: datos base, competencias, RA, criterios, bibliografia, plan semanal, flujo y PDF firmado. |
+| 2026-07-10 | S8.5 | S8.5-T7 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Carga docente conectada a gradebooks asignados, estudiantes, estructura de items y guardado individual con snapshot backend. |
+| 2026-07-10 | S8.5 | S8.5-T8 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Consulta estudiantil conectada a `/api/student/grades/` con nota final, letra, estado y pendientes honestos. |
+| 2026-07-10 | S8.5 | S8.5-T9 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Reportes MVP, consulta de notas, auditoria y descargas CSV/XLSX conectadas con filtros y manejo de 403. |
+| 2026-07-10 | S8.5 | S8.5-T10 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Dashboards por rol usan endpoints reales disponibles y estados vacios cuando no existe fuente agregada. |
+| 2026-07-10 | S8.5 | S8.5-T11 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | Playwright agregado con smoke desktop/mobile para login, ruta protegida y 403; Chromium instalado localmente. |
+| 2026-07-10 | S8.5 | S8.5-T12 | `feat/s8-5-frontend-integration-mvp` | `npm run lint`; `npm run typecheck`; `npm run build`; `npm run e2e` | `frontend/README.md`, design system, guias de usuario, UAT y `PROGRESS.md` actualizados; cursor movido a Sprint 9. || | | | | | |
 
 ---
 

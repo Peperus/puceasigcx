@@ -1,5 +1,5 @@
-import { DashboardPage } from "@/components/prototypes/dashboard-page";
+import { AcademicDashboard } from "@/components/data/academic-dashboard";
 
 export default function DashboardIndexPage() {
-  return <DashboardPage role="admin" />;
+  return <AcademicDashboard />;
 }

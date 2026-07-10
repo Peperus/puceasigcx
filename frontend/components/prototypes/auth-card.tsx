@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { ShieldCheck } from "lucide-react";
-import { Button } from "@/components/ui/button";
 
 export function AuthCard({
   title,
@@ -19,12 +18,12 @@ export function AuthCard({
           <div className="text-sm font-bold uppercase text-puce-blue-soft">PUCEASIG</div>
           <h1 className="mt-6 max-w-xl text-4xl font-black leading-tight">Sistema academico institucional</h1>
           <p className="mt-4 max-w-lg text-sm leading-6 text-blue-50">
-            Prototipos visuales para autenticacion, roles y experiencia base. La autenticacion JWT real se implementara en Sprint 1.
+            Acceso con JWT, roles institucionales y consumo de APIs del MVP academico.
           </p>
         </div>
         <div className="rounded-puce-lg border border-white/20 p-5">
           <ShieldCheck size={28} />
-          <p className="mt-3 text-sm leading-6 text-blue-50">Sin credenciales reales, sin datos personales y sin conexion al backend productivo.</p>
+          <p className="mt-3 text-sm leading-6 text-blue-50">Sin credenciales reales en el repositorio y con permisos validados por backend.</p>
         </div>
       </section>
       <section className="flex items-center justify-center px-4 py-10">
@@ -34,9 +33,6 @@ export function AuthCard({
           <p className="mt-3 text-sm leading-6 text-ui-text-muted">{description}</p>
           <div className="mt-6">{children}</div>
           <div className="mt-6 flex flex-wrap gap-3 border-t border-ui-border pt-5">
-            <Link href="/dashboard">
-              <Button variant="outline">Entrar al prototipo</Button>
-            </Link>
             <Link className="inline-flex min-h-[42px] items-center text-sm font-bold text-puce-blue" href="/recuperar">
               Recuperar acceso
             </Link>

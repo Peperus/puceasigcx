@@ -31,3 +31,9 @@ estado de resultados.
 
 El estudiante solo puede ver su propia informacion. No puede consultar reportes
 masivos, notas de otros estudiantes ni auditoria.
+# Uso desde frontend Sprint 8.5
+
+- Ingrese por `/login` con una cuenta sintetica de estudiante.
+- Use `/dashboard` para ver el resumen disponible del rol.
+- Use `/notas/estudiante` para consultar solo sus cursos visibles, nota final, letra y estado calculado.
+- Si no existen snapshots o notas publicadas, la pantalla muestra estado pendiente sin inventar datos.

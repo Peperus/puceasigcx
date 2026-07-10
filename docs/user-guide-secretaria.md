@@ -57,3 +57,9 @@ Use filtros antes de exportar CSV/XLSX para limitar la informacion.
 3. Use la auditoria para investigar cambios de notas, silabos, matriculas, roles
    y exportaciones.
 4. No edite registros de auditoria; son evidencia institucional.
+# Uso desde frontend Sprint 8.5
+
+- Ingrese por `/login` con una cuenta sintetica de secretaria.
+- Use `/periodos`, `/carreras`, `/asignaturas`, `/oferta` y `/matricula` para gestionar el flujo academico base.
+- Use `/reportes` para consultar y exportar CSV/XLSX; use `/auditoria` para revisar trazabilidad permitida.
+- Los errores de validacion y permisos se muestran en pantalla, pero la autorizacion final la aplica el backend.

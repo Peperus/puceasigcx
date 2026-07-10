@@ -12,6 +12,8 @@ Use este checklist con datos sinteticos. No registre datos reales durante UAT.
 
 ## Flujo academico base
 
+- [ ] Iniciar sesion en `/login` con usuario sintetico y verificar rol real en el header.
+- [ ] Intentar abrir `/dashboard` sin sesion y confirmar redireccion a login.
 - [ ] Crear periodo academico.
 - [ ] Crear carrera, modalidad, dominio, plan de estudio y nivel.
 - [ ] Crear asignatura con sistema de calificacion S1, S2 o S3.
@@ -26,6 +28,7 @@ Use este checklist con datos sinteticos. No registre datos reales durante UAT.
 
 ## Silabo
 
+- [ ] Abrir `/silabos` o `/silabos/constructor` en la UI.
 - [ ] Crear silabo para el curso asignado.
 - [ ] Registrar descripcion y metodologia.
 - [ ] Registrar competencias.
@@ -41,6 +44,7 @@ Use este checklist con datos sinteticos. No registre datos reales durante UAT.
 
 ## Notas
 
+- [ ] Abrir `/notas/carga-docente` como docente sintetico.
 - [ ] Abrir libro de calificaciones.
 - [ ] Registrar notas S1 por RA/criterio.
 - [ ] Registrar notas S2 con un RA en recuperacion y recuperarlo.
@@ -54,6 +58,7 @@ Use este checklist con datos sinteticos. No registre datos reales durante UAT.
 
 ## Reportes y auditoria
 
+- [ ] Abrir `/reportes` y `/auditoria` desde rol autorizado.
 - [ ] Exportar estudiantes por carrera/periodo.
 - [ ] Exportar docentes asignados por periodo.
 - [ ] Exportar cursos/paralelos activos.

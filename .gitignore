@@ -44,6 +44,8 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 .turbo/
+test-results/
+playwright-report/
 
 # Docker and local services
 .docker-data/

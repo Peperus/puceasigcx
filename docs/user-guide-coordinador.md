@@ -46,3 +46,9 @@ Use los filtros de auditoria para investigar acciones sobre su carrera:
 - matriculas y retiros;
 - cierres y reaperturas;
 - exportaciones de reportes.
+# Uso desde frontend Sprint 8.5
+
+- Ingrese por `/login` con una cuenta sintetica de coordinador.
+- Use `/oferta` para consultar/gestionar oferta, cursos y asignaciones dentro del alcance permitido por backend.
+- Use `/silabos` para aprobar, observar o reabrir silabos con justificacion cuando aplique.
+- Use `/reportes` y `/auditoria` para seguimiento academico y trazabilidad filtrada por permisos.

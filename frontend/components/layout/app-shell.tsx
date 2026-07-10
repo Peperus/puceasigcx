@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   BookOpen,
   ClipboardList,
@@ -16,13 +16,13 @@ import {
   Users,
 } from "lucide-react";
 import type { ReactNode } from "react";
-import type { RoleCode } from "@/config/roles";
-import { roleCodes, roleLabels } from "@/config/roles";
+import { useEffect } from "react";
+import { roleLabels } from "@/config/roles";
 import { getNavigationForRole } from "@/config/navigation";
-import { mockUserByRole } from "@/lib/mock-data";
+import { useAuth } from "@/lib/auth";
 import { cn } from "@/lib/utils";
-import { Select } from "@/components/ui/select";
 import { Button } from "@/components/ui/button";
+import { LoadingState } from "@/components/feedback/loading-state";
 
 const iconByHref = {
   "/dashboard": LayoutDashboard,
@@ -44,16 +44,31 @@ const iconByHref = {
 export function AppShell({ children }: { children: ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
-  const params = useSearchParams();
-  const requestedRole = params.get("role") as RoleCode | null;
-  const role = requestedRole && roleCodes.includes(requestedRole) ? requestedRole : "admin";
-  const user = mockUserByRole[role];
+  const { user, role, loading, logout } = useAuth();
   const navigation = getNavigationForRole(role);
 
-  function setRole(nextRole: RoleCode) {
-    const nextParams = new URLSearchParams(params.toString());
-    nextParams.set("role", nextRole);
-    router.push(`${pathname}?${nextParams.toString()}`);
+  useEffect(() => {
+    if (!window.localStorage.getItem("puceasig_tokens")) {
+      router.replace(`/login?next=${encodeURIComponent(pathname)}`);
+    }
+  }, [pathname, router]);
+
+  useEffect(() => {
+    if (!loading && !user) {
+      const timer = window.setTimeout(() => {
+        router.replace(`/login?next=${encodeURIComponent(pathname)}`);
+      }, 0);
+      return () => window.clearTimeout(timer);
+    }
+    return undefined;
+  }, [loading, pathname, router, user]);
+
+  if (loading || !user) {
+    return (
+      <main className="min-h-screen bg-ui-background p-6">
+        <LoadingState label="Validando sesion institucional" />
+      </main>
+    );
   }
 
   return (
@@ -62,7 +77,7 @@ export function AppShell({ children }: { children: ReactNode }) {
         <div className="border-b border-white/15 p-5">
           <div className="text-xs font-bold uppercase text-puce-blue-soft">PUCEASIG</div>
           <div className="mt-2 text-xl font-black">ERP academico</div>
-          <p className="mt-2 text-sm leading-5 text-blue-50">Prototipo Sprint 0.5 sin datos reales.</p>
+          <p className="mt-2 text-sm leading-5 text-blue-50">MVP conectado a API real.</p>
         </div>
         <nav className="flex-1 space-y-1 overflow-y-auto p-3">
           {navigation.map((item) => {
@@ -75,7 +90,7 @@ export function AppShell({ children }: { children: ReactNode }) {
                   "flex min-h-11 items-center gap-3 rounded-puce-sm px-3 text-sm font-bold transition-colors",
                   active ? "bg-white font-black shadow-puce-xs" : "text-blue-50 hover:bg-white/10",
                 )}
-                href={`${item.href}?role=${role}`}
+                href={item.href}
                 key={item.href}
                 style={active ? { color: "var(--color-brand-primary)" } : undefined}
               >
@@ -96,30 +111,20 @@ export function AppShell({ children }: { children: ReactNode }) {
               </Button>
               <div className="min-w-0">
                 <p className="truncate text-sm font-bold text-puce-blue">{roleLabels[role]}</p>
-                <p className="truncate text-xs text-ui-text-muted">{user.context}</p>
+                <p className="truncate text-xs text-ui-text-muted">{user.email}</p>
               </div>
             </div>
             <div className="flex items-center gap-3">
-              <label className="hidden text-sm font-bold text-ui-text-muted sm:block" htmlFor="role-selector">
-                Rol prototipo
-              </label>
-              <Select
-                className="w-44"
-                id="role-selector"
-                onChange={(event) => setRole(event.target.value as RoleCode)}
-                value={role}
-              >
-                {roleCodes.map((code) => (
-                  <option key={code} value={code}>
-                    {roleLabels[code]}
-                  </option>
-                ))}
-              </Select>
               <div className="hidden text-right md:block">
-                <p className="text-sm font-bold">{user.name}</p>
-                <p className="text-xs text-ui-text-muted">Sesion visual</p>
+                <p className="text-sm font-bold">{user.full_name || user.email}</p>
+                <p className="text-xs text-ui-text-muted">Sesion real</p>
               </div>
-              <Button aria-label="Cerrar sesion placeholder" className="h-10 min-h-10 w-10 px-0" variant="ghost">
+              <Button
+                aria-label="Cerrar sesion"
+                className="h-10 min-h-10 w-10 px-0"
+                onClick={() => void logout().then(() => router.replace("/login"))}
+                variant="ghost"
+              >
                 <LogOut size={18} />
               </Button>
             </div>

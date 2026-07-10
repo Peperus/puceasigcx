@@ -1,5 +1,5 @@
-import { GradesPrototype } from "@/components/prototypes/grades-prototype";
+import { ReportsWorkspace } from "@/components/data/reports-workspace";
 
 export default function SecretaryGradesPage() {
-  return <GradesPrototype mode="secretary" />;
+  return <ReportsWorkspace initialTab="grades" />;
 }

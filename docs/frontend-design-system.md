@@ -1,8 +1,7 @@
 # Frontend design system
 
-Documento de handoff del Sprint 0.5 para el frontend PUCEASIG. La base visual
-queda lista para que los sprints funcionales implementen autenticacion, permisos,
-catalogos, silabos, notas, reportes y auditoria sobre una experiencia coherente.
+Documento de handoff del frontend PUCEASIG. Sprint 8.5 mantiene la base visual
+del Sprint 0.5 y agrega integracion funcional con las APIs reales del MVP.
 
 ## Stack frontend
 
@@ -11,8 +10,8 @@ catalogos, silabos, notas, reportes y auditoria sobre una experiencia coherente.
 - Tema central en `frontend/config/theme.ts`.
 - Iconografia con `lucide-react`.
 - Componentes propios equivalentes a shadcn/ui, ubicados en `frontend/components`.
-- Mocks sinteticos centralizados en `frontend/lib/mock-data.ts`.
-- Cliente API preparado en `frontend/lib/api.ts`, sin consumo real todavia.
+- Mocks sinteticos conservados solo para referencias no funcionales.
+- Cliente API real en `frontend/lib/api.ts` y sesion JWT en `frontend/lib/auth.tsx`.
 
 ## Estructura
 
@@ -29,6 +28,7 @@ frontend/
 │   └── page.tsx
 ├── components/
 │   ├── dashboard/
+│   ├── data/
 │   ├── feedback/
 │   ├── layout/
 │   ├── prototypes/
@@ -101,7 +101,9 @@ Feedback en `frontend/components/feedback`:
 
 Layout y prototipos:
 
-- `AppShell`: layout autenticado con sidebar, header, breadcrumb indirecto y selector temporal de rol.
+- `AppShell`: layout autenticado con sidebar, header y navegacion por rol real.
+- Componentes `components/data`: recursos CRUD, tabs funcionales, dashboards,
+  silabos, notas, reportes y auditoria conectados a API.
 - `MetricCard`: tarjeta reusable de dashboard.
 - `ModulePage`: wireframe reusable para modulos CRUD/listado.
 - `DashboardPage`: dashboard por rol con indicadores mock.
@@ -128,10 +130,11 @@ Roles contemplados:
 - Estudiante.
 - Bienestar / apoyo institucional.
 
-El selector de rol del header es solo un artefacto de prototipo. En Sprint 1 debe
-reemplazarse por el rol devuelto desde `/api/me/` o el endpoint de perfil que se
-defina. La UI nunca debe ser la unica barrera de permisos; el backend debe
-validar permisos en views, serializers y servicios criticos.
+La navegacion usa los codigos reales devueltos por `/api/me/`:
+`administrator`, `secretary`, `career_coordinator`, `teacher`, `student`,
+`academic_director`, `wellbeing`, `librarian` y `guest`. La UI nunca debe ser la
+unica barrera de permisos; el backend valida permisos en views, serializers y
+servicios criticos.
 
 ## Rutas prototipo
 
@@ -186,17 +189,15 @@ Los mocks actuales cubren:
 - Sistemas de notas S1, S2 y S3.
 - Eventos sinteticos de auditoria.
 
-## Reemplazo por API real
+## Integracion por API real
 
-Cuando un sprint funcional conecte una pantalla:
+Sprint 8.5 conecta las pantallas MVP principales:
 
-1. Mantener el componente visual si ya resuelve layout, estados y accesibilidad.
-2. Crear tipos de respuesta en `frontend/types`.
-3. Implementar llamadas en `frontend/lib/api.ts` o helpers especificos.
-4. Reemplazar solo el origen de datos del prototipo.
-5. Conservar estados de carga, error y vacio.
-6. Validar permisos en backend; el filtrado del menu solo mejora la experiencia.
-7. Retirar o aislar mocks que ya no apliquen.
+- Autenticacion: `/api/auth/login/`, `/api/auth/refresh/`, `/api/auth/logout/`, `/api/me/`.
+- Catalogos/personas/oferta/matricula: recursos DRF con busqueda y formularios MVP.
+- Silabos: recurso principal, secciones del constructor, flujo y PDF firmado.
+- Notas: gradebooks docentes, estructura, estudiantes, registro individual y vista estudiante.
+- Reportes/auditoria: filtros, consulta y exportacion cuando el backend la expone.
 
 ## Convenciones
 
@@ -227,7 +228,23 @@ Cuando un sprint funcional conecte una pantalla:
 - Agregar permisos backend antes de tratar una pantalla como funcional.
 - Mantener mocks separados de integraciones reales.
 - Ejecutar `npm run lint`, `npm run typecheck` y `npm run build`.
+- Ejecutar `npm run e2e` cuando cambien login, shell, rutas protegidas o flujos MVP.
 - Actualizar esta documentacion si cambia un componente, flujo o convencion.
+
+## Verificaciones del Sprint 8.5
+
+Ejecutadas el 2026-07-10:
+
+```bash
+cd frontend
+npm run lint
+npm run typecheck
+npm run build
+npm run e2e
+```
+
+Notas: Playwright usa Chromium instalado localmente. `npm audit` mantiene 2
+vulnerabilidades moderadas transitivas; no se aplico `npm audit fix --force`.
 
 ## Verificaciones del Sprint 0.5
 

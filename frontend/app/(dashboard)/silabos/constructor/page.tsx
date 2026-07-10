@@ -1,5 +1,5 @@
-import { SyllabusBuilder } from "@/components/prototypes/syllabus-builder";
+import { SyllabusWorkspace } from "@/components/data/syllabus-workspace";
 
 export default function SyllabusBuilderPage() {
-  return <SyllabusBuilder />;
+  return <SyllabusWorkspace />;
 }

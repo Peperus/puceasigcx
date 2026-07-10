@@ -43,3 +43,9 @@ roles autorizados.
 Puede consultar sus cursos y los estudiantes matriculados en ellos. Las
 exportaciones institucionales masivas corresponden a roles de secretaria,
 coordinacion o direccion academica.
+# Uso desde frontend Sprint 8.5
+
+- Ingrese por `/login` con una cuenta sintetica de docente.
+- Use `/silabos` o `/silabos/constructor` para crear/completar silabos y enviarlos a revision.
+- Use `/notas/carga-docente` para seleccionar un gradebook asignado, elegir estudiante e item de nota, guardar y ver el snapshot recalculado por backend.
+- Si un libro esta cerrado o no pertenece al docente, la API devuelve el bloqueo correspondiente.

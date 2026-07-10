@@ -1,7 +1,7 @@
 # PUCEASIG frontend
 
-Frontend base del ERP/SIG academico PUCE Amazonas. El Sprint 0.5 deja lista la
-fundacion visual y UX antes de iniciar pantallas funcionales del MVP.
+Frontend del ERP/SIG academico PUCE Amazonas. Sprint 8.5 convierte la base visual
+del Sprint 0.5 en una UI funcional conectada a las APIs reales del MVP.
 
 ## Stack
 
@@ -10,6 +10,7 @@ fundacion visual y UX antes de iniciar pantallas funcionales del MVP.
 - Tailwind CSS.
 - Lucide React para iconografia.
 - ESLint.
+- Playwright para smoke E2E.
 - npm como gestor inicial.
 
 ## Scripts
@@ -19,6 +20,7 @@ npm run dev
 npm run lint
 npm run typecheck
 npm run build
+npm run e2e
 ```
 
 `npm run dev` usa Webpack por defecto. Next.js 16.2.10 con Turbopack puede
@@ -49,33 +51,27 @@ frontend/
 └── types/
 ```
 
-## Que incluye el Sprint 0.5
+## Integracion Sprint 8.5
 
-- Tokens visuales institucionales en `config/theme.ts` y `app/globals.css`.
-- Componentes UI reutilizables: botones, inputs, selects, cards, tablas, badges,
-  dialog, alertas, tabs, breadcrumbs, paginacion y estados de feedback.
-- Layout autenticado con sidebar, header, menu por rol y selector temporal de
-  rol para prototipo.
-- Prototipos publicos: login, recuperacion, preguntas de seguridad, 403, 404 y
-  error general.
-- Dashboards por rol.
-- Wireframes navegables para estudiantes, docentes, roles, periodos, carreras,
-  asignaturas, paralelos, oferta, matricula, silabos, notas, reportes y
-  auditoria.
-- Constructor visual de silabos nueva version.
-- Prototipo visual de gestion de notas S1/S2/S3.
+- Login real contra `/api/auth/login/`, refresh, logout y perfil `/api/me/`.
+- Shell autenticado con navegacion filtrada por roles reales.
+- Catalogos, personas, estudiantes, docentes, oferta, cursos, asignaciones y
+  matriculas conectados a DRF.
+- Workspace de silabos con secciones, flujo de revision y carga de PDF firmado.
+- Workspace de notas docente/estudiante conectado a gradebooks y snapshots.
+- Reportes MVP, consulta de notas, auditoria y exportaciones CSV/XLSX.
+- Dashboards por rol usando endpoints reales disponibles y estados vacios honestos.
+- Smoke E2E desktop/mobile para login, proteccion de rutas y 403.
 
 ## Datos mock
 
 Los datos sinteticos viven en `lib/mock-data.ts`. No usar datos reales de
 estudiantes, docentes, autoridades, personal administrativo ni credenciales.
 
-## Integracion futura
+## Configuracion API
 
-La autenticacion real, el consumo de API, permisos efectivos, persistencia de
-silabos, motor de notas y reportes exportables quedan para los sprints
-funcionales. El selector de rol se debe reemplazar en Sprint 1 por el perfil
-obtenido desde la API.
+Configure `NEXT_PUBLIC_API_BASE_URL` si el backend no corre en
+`http://localhost:8000/api`. No guarde credenciales reales en archivos del repo.
 
 ## Verificacion
 
@@ -84,6 +80,7 @@ npm install
 npm run lint
 npm run typecheck
 npm run build
+npm run e2e
 ```
 
 `npm audit` reporta 2 vulnerabilidades moderadas transitivas en la base actual.
