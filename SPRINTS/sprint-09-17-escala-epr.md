@@ -17,6 +17,9 @@ Antes de iniciar Sprint 9, el MVP debe permitir:
 - reportes básicos;
 - auditoría;
 - despliegue piloto documentado.
+- UI frontend funcional conectada a APIs reales del MVP, cerrada en Sprint 8.5.
+
+> Sprint 8.5 — Frontend Integration MVP debe cerrarse antes de implementar Sprint 9. El bloque de escala no debe comenzar sobre pantallas críticas todavía mockeadas.
 
 ---
 

@@ -12,6 +12,10 @@ auditoria, QA automatizado, guias de usuario, guia de despliegue y checklist
 UAT. El frontend Next.js conserva la base visual y prototipos navegables del
 Sprint 0.5 para conectar progresivamente a las APIs reales.
 
+El siguiente sprint activo es `Sprint 8.5 — Frontend Integration MVP`, cuyo
+objetivo es convertir esos prototipos en una UI funcional conectada al backend
+antes de iniciar modulos post-MVP como admisiones.
+
 ## Alcance del MVP
 
 El MVP debe permitir:
@@ -71,6 +75,8 @@ Al inicio del proyecto algunas carpetas todavia no existen; se crean en sus tick
 - `docs/deployment.md`: despliegue piloto, variables, static/media y backups.
 - `docs/uat-checklist.md`: escenarios de aceptacion institucional.
 - `docs/mvp-release-notes.md`: release notes, limitaciones y backlog post-MVP.
+- `SPRINTS/sprint-08-5-frontend-integration-mvp.md`: plan para UI funcional
+  conectada a APIs reales del MVP.
 
 ## APIs MVP destacadas
 

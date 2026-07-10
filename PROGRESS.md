@@ -16,10 +16,10 @@
 
 ## 📍 Cursor actual
 
-- **Sprint activo:** Sprint 9 — Admisiones y captación (pendiente de autorización/desglose)
-- **Ticket activo:** `S9-T0` (preparar archivo específico de Sprint 9 antes de implementar)
-- **Última sesión:** 2026-07-10 — cerrado Sprint 8 completo (`S8-T1` a `S8-T8`) y MVP `v0.1.0-mvp` preparado
-- **Próximo paso:** No iniciar módulos post-MVP sin autorización. Si se autoriza Sprint 9, crear `SPRINTS/sprint-09-admisiones.md` con tickets pequeños, criterios y verificaciones.
+- **Sprint activo:** Sprint 8.5 — Frontend Integration MVP
+- **Ticket activo:** `S8.5-T1` (aún no iniciado)
+- **Última sesión:** 2026-07-10 — creado plan de Sprint 8.5 para convertir el frontend del MVP en UI funcional conectada a APIs reales
+- **Próximo paso:** Implementar autenticación real del frontend. Ver `SPRINTS/sprint-08-5-frontend-integration-mvp.md`, ticket `S8.5-T1`.
 
 ---
 
@@ -44,9 +44,10 @@
 - ✅ Sprint 6 — Grading Engine S1/S2/S3
 - ✅ **Sprint 7 — Grade Entry, Student Views & Closures**
 - ✅ **Sprint 8 — Reports, Audit, QA & MVP Release**  ← **MVP funcional cerrado**
+- 🟡 Sprint 8.5 — Frontend Integration MVP  ← **UI funcional antes del bloque post-MVP**
 
 ### Bloque Escalamiento ERP/SIG posterior al MVP
-- 🟡 Sprint 9 — Admisiones y captación
+- ⬜ Sprint 9 — Admisiones y captación
 - ⬜ Sprint 10 — Bienestar universitario
 - ⬜ Sprint 11 — Biblioteca y repositorio académico
 - ⬜ Sprint 12 — Requerimientos, PQRSD y mensajería institucional
@@ -60,6 +61,22 @@
 
 ## Detalle de sprints
 
+### Sprint 8.5 — Frontend Integration MVP
+- 🟡 S8.5-T1 — Cliente API, sesión y autenticación real
+- ⬜ S8.5-T2 — Navegación por rol y shell autenticado funcional
+- ⬜ S8.5-T3 — Catálogos académicos funcionales
+- ⬜ S8.5-T4 — Personas, estudiantes y docentes funcionales
+- ⬜ S8.5-T5 — Oferta académica, asignación docente y matrícula funcionales
+- ⬜ S8.5-T6 — Constructor de sílabos conectado a API
+- ⬜ S8.5-T7 — Carga docente de notas S1/S2/S3 funcional
+- ⬜ S8.5-T8 — Consulta estudiantil de notas funcional
+- ⬜ S8.5-T9 — Reportes y auditoría funcionales
+- ⬜ S8.5-T10 — Dashboards funcionales por rol
+- ⬜ S8.5-T11 — QA E2E y accesibilidad básica
+- ⬜ S8.5-T12 — Documentación y cierre UI MVP
+
+> Sprint 8.5 creado el 2026-07-10. Este sprint no agrega módulos post-MVP; integra el frontend existente con APIs reales del MVP antes de iniciar Sprint 9.
+
 ### Sprint 8 — Reports, Audit, QA & MVP Release
 - ✅ S8-T1 — Reportes académicos mínimos del MVP
 - ✅ S8-T2 — Auditoría transversal
@@ -70,7 +87,7 @@
 - ✅ S8-T7 — Smoke tests y UAT checklist
 - ✅ S8-T8 — Cierre formal del MVP
 
-> Sprint 8 cerrado el 2026-07-10. El MVP de Gestión Académica queda preparado como `v0.1.0-mvp`. El cursor queda en Sprint 9 / S9-T0, pendiente de autorización y desglose antes de implementar módulos post-MVP.
+> Sprint 8 cerrado el 2026-07-10. El MVP de Gestión Académica queda preparado como `v0.1.0-mvp`. El cursor se mueve a Sprint 8.5 / S8.5-T1 para completar la UI funcional antes de implementar módulos post-MVP.
 
 ### Sprint 7 — Grade Entry, Student Views & Closures
 - ✅ S7-T1 — API de ingreso de notas para docentes

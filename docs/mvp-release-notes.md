@@ -38,7 +38,8 @@ El MVP de Gestion Academica cubre:
 ## Limitaciones conocidas
 
 - El frontend sigue operando principalmente como prototipo navegable con mocks;
-  el backend ya expone APIs funcionales del MVP.
+  el backend ya expone APIs funcionales del MVP. Esta brecha queda planificada
+  en `Sprint 8.5 — Frontend Integration MVP` antes de iniciar Sprint 9.
 - El almacenamiento S3-compatible esta documentado como estrategia de despliegue;
   la configuracion por defecto usa storage local de Django.
 - El correo institucional SMTP queda configurable por variables de entorno; en
