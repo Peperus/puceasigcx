@@ -67,7 +67,16 @@ def test_closed_gradebook_blocks_normal_changes_and_reopen_requires_reason():
         code="AUD2",
         course_section=gradebook.course_section,
     )
-    item = add_s1_s2_structure(gradebook)[0]["activity"]
+    items = add_s1_s2_structure(gradebook)
+    item = items[0]["activity"]
+    for grade_item in items:
+        save_grade_record(
+            gradebook=gradebook,
+            course_enrollment=course_enrollment,
+            grade_item=grade_item["activity"],
+            score=40,
+            user=user,
+        )
     close_gradebook(gradebook, user=user)
 
     with pytest.raises(ValidationError):

@@ -363,8 +363,33 @@ def open_gradebook(gradebook, *, user=None, request=None):
 
 
 @transaction.atomic
-def close_gradebook(gradebook, *, user=None, request=None):
+def close_gradebook(
+    gradebook,
+    *,
+    user=None,
+    request=None,
+    allow_incomplete=False,
+):
     previous = _gradebook_snapshot(gradebook)
+    try:
+        recalculate_gradebook(
+            gradebook,
+            user=user,
+            source="gradebook_closure",
+            request=request,
+        )
+    except ValidationError:
+        if not allow_incomplete:
+            raise
+        log_event(
+            action="gradebook_closed_with_incomplete_grades",
+            module="grading",
+            user=user,
+            model_name=Gradebook.__name__,
+            object_id=gradebook.pk,
+            new_data={"allow_incomplete": True},
+            request=request,
+        )
     gradebook.status = GradebookStatus.CLOSED
     gradebook.save()
     log_event(
@@ -639,13 +664,31 @@ def recalculate_gradebook(
     user=None,
     source="manual_recalculation",
     request=None,
+    allow_incomplete=False,
 ):
     enrollments = (
         course_enrollments or gradebook.course_section.course_enrollments.all()
     )
     snapshots = []
     for course_enrollment in enrollments:
-        result = calculate_gradebook_student(gradebook, course_enrollment)
+        try:
+            result = calculate_gradebook_student(gradebook, course_enrollment)
+        except ValidationError as exc:
+            if not allow_incomplete:
+                raise
+            result = {
+                "grading_model": gradebook.grading_model,
+                "final_score": Decimal("0.00"),
+                "final_letter": "D",
+                "final_status": GradeFinalStatus.PENDING,
+                "failed_learning_outcomes_count": 0,
+                "recovery_required": False,
+                "errors": (
+                    exc.message_dict
+                    if hasattr(exc, "message_dict")
+                    else {"non_field_errors": exc.messages}
+                ),
+            }
         GradeCalculationSnapshot.objects.filter(
             gradebook=gradebook,
             course_enrollment=course_enrollment,

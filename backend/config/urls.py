@@ -2,6 +2,7 @@ from django.contrib import admin
 from django.urls import include, path
 
 from apps.accounts.views import CurrentUserView
+from apps.grading.views import StudentGradesView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -11,6 +12,7 @@ urlpatterns = [
     path("api/academic/", include("apps.academic_catalogs.urls")),
     path("api/people/", include("apps.people.urls")),
     path("api/students/", include("apps.students.urls")),
+    path("api/student/grades/", StudentGradesView.as_view(), name="student-grades"),
     path("api/teachers/", include("apps.teachers.urls")),
     path("api/enrollment/", include("apps.enrollment.urls")),
     path("api/syllabi/", include("apps.syllabus.urls")),

@@ -108,3 +108,43 @@ def add_s1_s2_structure(gradebook):
             }
         )
     return items
+
+
+def add_s3_structure(gradebook):
+    partials = []
+    for partial_order in range(1, 4):
+        partial = GradeItem.objects.create(
+            gradebook=gradebook,
+            item_type=GradeItemType.PARTIAL,
+            name=f"Parcial {partial_order}",
+            order=partial_order,
+        )
+        practice = GradeItem.objects.create(
+            gradebook=gradebook,
+            parent=partial,
+            item_type=GradeItemType.PRACTICE_ACTIVITY,
+            name=f"Practica {partial_order}",
+            order=1,
+            weight=100,
+        )
+        evaluation = GradeItem.objects.create(
+            gradebook=gradebook,
+            parent=partial,
+            item_type=GradeItemType.EVALUATION,
+            name=f"Evaluacion {partial_order}",
+            order=2,
+        )
+        partials.append(
+            {
+                "partial": partial,
+                "practice": practice,
+                "evaluation": evaluation,
+            }
+        )
+    final_evaluation = GradeItem.objects.create(
+        gradebook=gradebook,
+        item_type=GradeItemType.FINAL_EVALUATION,
+        name="Cuarta evaluacion",
+        order=4,
+    )
+    return {"partials": partials, "final_evaluation": final_evaluation}
