@@ -4,6 +4,14 @@ PUCEASIG es el Sistema ERP/SIG Academico para PUCE Amazonas. El MVP se enfoca en
 
 El desarrollo se ejecuta por sprints pequenos y verificables. El cursor de trabajo esta en `PROGRESS.md`; Codex debe trabajar unicamente el ticket activo.
 
+## Estado MVP
+
+El MVP `v0.1.0-mvp` queda preparado para validacion piloto al cierre del
+Sprint 8. Incluye backend funcional para gestion academica, reportes,
+auditoria, QA automatizado, guias de usuario, guia de despliegue y checklist
+UAT. El frontend Next.js conserva la base visual y prototipos navegables del
+Sprint 0.5 para conectar progresivamente a las APIs reales.
+
 ## Alcance del MVP
 
 El MVP debe permitir:
@@ -56,6 +64,27 @@ Al inicio del proyecto algunas carpetas todavia no existen; se crean en sus tick
 - `docs/frontend-architecture.md`: decision frontend para el MVP.
 - `docs/mvp-roadmap.md`: fases y entregables.
 - `docs/backend-app-conventions.md`: convencion de estructura para apps Django.
+- `docs/user-guide-secretaria.md`: guia MVP para secretaria academica.
+- `docs/user-guide-docente.md`: guia MVP para docentes.
+- `docs/user-guide-coordinador.md`: guia MVP para coordinacion de carrera.
+- `docs/user-guide-estudiante.md`: guia MVP para estudiantes.
+- `docs/deployment.md`: despliegue piloto, variables, static/media y backups.
+- `docs/uat-checklist.md`: escenarios de aceptacion institucional.
+- `docs/mvp-release-notes.md`: release notes, limitaciones y backlog post-MVP.
+
+## APIs MVP destacadas
+
+- `/api/auth/login/`, `/api/auth/refresh/`, `/api/auth/logout/`
+- `/api/me/`
+- `/api/academic/`
+- `/api/people/`, `/api/students/`, `/api/teachers/`
+- `/api/enrollment/`
+- `/api/syllabi/`
+- `/api/grading/teacher/gradebooks/`
+- `/api/student/grades/`
+- `/api/reports/grades/` y `/api/reports/grades/export/`
+- `/api/reports/mvp/<students|teachers|courses|syllabi|grades>/`
+- `/api/audit/logs/`
 
 ## Comandos previstos
 

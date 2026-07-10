@@ -3,6 +3,7 @@ from rest_framework.filters import OrderingFilter, SearchFilter
 from rest_framework.permissions import BasePermission
 
 from apps.accounts.roles import ROLE_STUDENT, ROLE_TEACHER, user_has_role
+from apps.audit.services import log_event
 
 from .selectors import (
     person_for_user,
@@ -11,6 +12,16 @@ from .selectors import (
     visible_people_for_user,
 )
 from .serializers import PersonSerializer
+
+
+def _person_snapshot(person):
+    return {
+        "id": person.pk,
+        "user_id": person.user_id,
+        "identification_number": person.identification_number,
+        "institutional_email": person.institutional_email,
+        "is_active": person.is_active,
+    }
 
 
 class CanReadOrManagePeople(BasePermission):
@@ -40,3 +51,43 @@ class PersonViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         return visible_people_for_user(self.request.user)
+
+    def perform_create(self, serializer):
+        person = serializer.save()
+        log_event(
+            action="person_created",
+            module="people",
+            user=self.request.user,
+            model_name="Person",
+            object_id=person.pk,
+            new_data=_person_snapshot(person),
+            request=self.request,
+        )
+
+    def perform_update(self, serializer):
+        previous = _person_snapshot(serializer.instance)
+        person = serializer.save()
+        log_event(
+            action="person_updated",
+            module="people",
+            user=self.request.user,
+            model_name="Person",
+            object_id=person.pk,
+            previous_data=previous,
+            new_data=_person_snapshot(person),
+            request=self.request,
+        )
+
+    def perform_destroy(self, instance):
+        previous = _person_snapshot(instance)
+        object_id = instance.pk
+        instance.delete()
+        log_event(
+            action="person_deleted",
+            module="people",
+            user=self.request.user,
+            model_name="Person",
+            object_id=object_id,
+            previous_data=previous,
+            request=self.request,
+        )
